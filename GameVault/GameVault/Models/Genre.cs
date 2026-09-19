@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static GameVault.Common.EntityValidation;
 
-namespace GameVault.Models
+namespace GameVault.ViewModels
 {
     public class Genre
     {
@@ -8,10 +9,10 @@ namespace GameVault.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(MaxGenreNameLength)]
         public string Name { get; set; } = null!;
 
-        public ICollection<Game> Games { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
             = new List<Game>();
     }
 }

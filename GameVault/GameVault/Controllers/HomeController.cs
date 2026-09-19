@@ -1,4 +1,4 @@
-using GameVault.Models;
+using GameVault.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
