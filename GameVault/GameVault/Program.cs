@@ -1,10 +1,16 @@
 namespace GameVault
 {
+    using GameVault.Data;
+    using Microsoft.EntityFrameworkCore;
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<GameVaultDbContext>(options =>
+            options.UseSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
