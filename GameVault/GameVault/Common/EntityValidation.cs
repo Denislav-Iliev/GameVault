@@ -15,5 +15,19 @@
         public const int GameDeveloperNameMaxLength = 100;
 
         public const int ImageUrlMaxLength = 500;
+
+        public const int MinRating = 1;
+
+        public const int MaxRating = 10;
+
+        public const int ReviewContentMaxLength = 1000;
+
+        public const int UserGameStatusMaxLength = 20;
+
+        public const int MinHoursPlayed = 0;
+
+        public const int MaxHoursPlayed = 100000;
+
+        public const int UserGameNotesMaxLength = 1000;
     }
 }

@@ -1,4 +1,5 @@
-﻿using GameVault.ViewModels;
+﻿using GameVault.Models;
+using GameVault.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameVault.Data
@@ -14,5 +15,9 @@ namespace GameVault.Data
         public virtual DbSet<Game> Games { get; set; } = null!;
 
         public virtual DbSet<Genre> Genres { get; set; } = null!;
+
+        public virtual DbSet<Review> Reviews { get; set; } = null!;
+
+        public virtual DbSet<UserGame> UserGames { get; set; } = null!;
     }
 }

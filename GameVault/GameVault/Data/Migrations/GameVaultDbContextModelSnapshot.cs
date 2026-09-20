@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GameVault.Migrations
+namespace GameVault.Data.Migrations
 {
     [DbContext(typeof(GameVaultDbContext))]
     partial class GameVaultDbContextModelSnapshot : ModelSnapshot

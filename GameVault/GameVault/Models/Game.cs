@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GameVault.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static GameVault.Common.EntityValidation;
 
@@ -32,5 +33,11 @@ namespace GameVault.ViewModels
 
         [ForeignKey(nameof(GenreId))]
         public virtual Genre Genre { get; set; } = null!;
+
+        public virtual ICollection<Review> Reviews { get; set; }
+        = new List<Review>();
+
+        public virtual ICollection<UserGame> UserGames { get; set; }
+            = new List<UserGame>();
     }
 }

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace GameVault.Migrations
+namespace GameVault.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
