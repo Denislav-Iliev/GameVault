@@ -19,5 +19,13 @@ namespace GameVault.Data
         public virtual DbSet<Review> Reviews { get; set; } = null!;
 
         public virtual DbSet<UserGame> UserGames { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(
+                typeof(GameVaultDbContext).Assembly);
+        }
     }
 }

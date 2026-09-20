@@ -122,6 +122,98 @@ namespace GameVault.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("Games");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "An open-world RPG following Geralt of Rivia on his search for Ciri.",
+                            Developer = "CD Projekt Red",
+                            GenreId = 3,
+                            ReleaseYear = 2015,
+                            Title = "The Witcher 3: Wild Hunt"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "A remastered action RPG focused on character progression, loot and challenging combat.",
+                            Developer = "Blizzard Entertainment",
+                            GenreId = 3,
+                            ReleaseYear = 2021,
+                            Title = "Diablo II: Resurrected"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "An open-world action RPG set in the mysterious Lands Between.",
+                            Developer = "FromSoftware",
+                            GenreId = 3,
+                            ReleaseYear = 2022,
+                            Title = "Elden Ring"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "A competitive tactical first-person shooter focused on team-based matches.",
+                            Developer = "Valve",
+                            GenreId = 5,
+                            ReleaseYear = 2023,
+                            Title = "Counter-Strike 2"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "A fast-paced first-person shooter featuring intense combat against demonic forces.",
+                            Developer = "id Software",
+                            GenreId = 5,
+                            ReleaseYear = 2020,
+                            Title = "DOOM Eternal"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "A turn-based strategy game about building and developing a civilization.",
+                            Developer = "Firaxis Games",
+                            GenreId = 4,
+                            ReleaseYear = 2016,
+                            Title = "Civilization VI"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "A survival horror game following Leon Kennedy on a dangerous rescue mission.",
+                            Developer = "Capcom",
+                            GenreId = 8,
+                            ReleaseYear = 2023,
+                            Title = "Resident Evil 4"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "A flight simulation game featuring detailed aircraft and locations around the world.",
+                            Developer = "Asobo Studio",
+                            GenreId = 6,
+                            ReleaseYear = 2020,
+                            Title = "Microsoft Flight Simulator"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "A football simulation game featuring clubs, players and competitions from around the world.",
+                            Developer = "EA Sports",
+                            GenreId = 7,
+                            ReleaseYear = 2024,
+                            Title = "EA Sports FC 25"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "An open-world adventure following outlaw Arthur Morgan and the Van der Linde gang.",
+                            Developer = "Rockstar Games",
+                            GenreId = 2,
+                            ReleaseYear = 2018,
+                            Title = "Red Dead Redemption 2"
+                        });
                 });
 
             modelBuilder.Entity("GameVault.ViewModels.Genre", b =>
@@ -140,6 +232,48 @@ namespace GameVault.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Action"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Adventure"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "RPG"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Strategy"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Shooter"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Simulation"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Sports"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Horror"
+                        });
                 });
 
             modelBuilder.Entity("GameVault.Models.Review", b =>
