@@ -19,7 +19,7 @@ namespace GameVault.Controllers
                 .OrderByDescending(g => g.ReleaseYear)
                 .ToArray();
 
-            return View();
+            return View(games);
         }
     }
 }
