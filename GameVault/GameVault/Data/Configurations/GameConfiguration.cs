@@ -110,6 +110,16 @@ namespace GameVault.Data.Configurations
                     Developer = "Rockstar Games",
                     ImageUrl = "/images/games/RDR2.webp",
                     GenreId = 2
+                },
+                new Game
+                {
+                    Id = 11,
+                    Title = "God of War",
+                    Description = "Kratos and his son Atreus journey through the Norse realms while facing gods, monsters and their own past.",
+                    ReleaseYear = 2018,
+                    Developer = "Santa Monica Studio",
+                    ImageUrl = "/images/games/god-of-war.jpg",
+                    GenreId = 1
                 }
             );
         }

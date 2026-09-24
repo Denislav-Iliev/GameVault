@@ -223,6 +223,16 @@ namespace GameVault.Migrations
                             ImageUrl = "/images/games/RDR2.webp",
                             ReleaseYear = 2018,
                             Title = "Red Dead Redemption 2"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "Kratos and his son Atreus journey through the Norse realms while facing gods, monsters and their own past.",
+                            Developer = "Santa Monica Studio",
+                            GenreId = 1,
+                            ImageUrl = "/images/games/god-of-war.jpg",
+                            ReleaseYear = 2018,
+                            Title = "God of War"
                         });
                 });
 
