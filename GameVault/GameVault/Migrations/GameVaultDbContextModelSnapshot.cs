@@ -130,6 +130,7 @@ namespace GameVault.Migrations
                             Description = "An open-world RPG following Geralt of Rivia on his search for Ciri.",
                             Developer = "CD Projekt Red",
                             GenreId = 3,
+                            ImageUrl = "/images/games/Witcher3.png",
                             ReleaseYear = 2015,
                             Title = "The Witcher 3: Wild Hunt"
                         },
@@ -139,6 +140,7 @@ namespace GameVault.Migrations
                             Description = "A remastered action RPG focused on character progression, loot and challenging combat.",
                             Developer = "Blizzard Entertainment",
                             GenreId = 3,
+                            ImageUrl = "/images/games/D2R.png",
                             ReleaseYear = 2021,
                             Title = "Diablo II: Resurrected"
                         },
@@ -148,6 +150,7 @@ namespace GameVault.Migrations
                             Description = "An open-world action RPG set in the mysterious Lands Between.",
                             Developer = "FromSoftware",
                             GenreId = 3,
+                            ImageUrl = "/images/games/EldenRing.webp",
                             ReleaseYear = 2022,
                             Title = "Elden Ring"
                         },
@@ -157,6 +160,7 @@ namespace GameVault.Migrations
                             Description = "A competitive tactical first-person shooter focused on team-based matches.",
                             Developer = "Valve",
                             GenreId = 5,
+                            ImageUrl = "/images/games/CS2.jpg",
                             ReleaseYear = 2023,
                             Title = "Counter-Strike 2"
                         },
@@ -166,6 +170,7 @@ namespace GameVault.Migrations
                             Description = "A fast-paced first-person shooter featuring intense combat against demonic forces.",
                             Developer = "id Software",
                             GenreId = 5,
+                            ImageUrl = "/images/games/DoomEternal.jpg",
                             ReleaseYear = 2020,
                             Title = "DOOM Eternal"
                         },
@@ -175,6 +180,7 @@ namespace GameVault.Migrations
                             Description = "A turn-based strategy game about building and developing a civilization.",
                             Developer = "Firaxis Games",
                             GenreId = 4,
+                            ImageUrl = "/images/games/CivilizationVI.jpg",
                             ReleaseYear = 2016,
                             Title = "Civilization VI"
                         },
@@ -184,6 +190,7 @@ namespace GameVault.Migrations
                             Description = "A survival horror game following Leon Kennedy on a dangerous rescue mission.",
                             Developer = "Capcom",
                             GenreId = 8,
+                            ImageUrl = "/images/games/RE4.jpg",
                             ReleaseYear = 2023,
                             Title = "Resident Evil 4"
                         },
@@ -193,6 +200,7 @@ namespace GameVault.Migrations
                             Description = "A flight simulation game featuring detailed aircraft and locations around the world.",
                             Developer = "Asobo Studio",
                             GenreId = 6,
+                            ImageUrl = "/images/games/MFS2024.jpg",
                             ReleaseYear = 2020,
                             Title = "Microsoft Flight Simulator"
                         },
@@ -202,6 +210,7 @@ namespace GameVault.Migrations
                             Description = "A football simulation game featuring clubs, players and competitions from around the world.",
                             Developer = "EA Sports",
                             GenreId = 7,
+                            ImageUrl = "/images/games/FC25.jpg",
                             ReleaseYear = 2024,
                             Title = "EA Sports FC 25"
                         },
@@ -211,6 +220,7 @@ namespace GameVault.Migrations
                             Description = "An open-world adventure following outlaw Arthur Morgan and the Van der Linde gang.",
                             Developer = "Rockstar Games",
                             GenreId = 2,
+                            ImageUrl = "/images/games/RDR2.webp",
                             ReleaseYear = 2018,
                             Title = "Red Dead Redemption 2"
                         });

@@ -2,6 +2,7 @@
 using GameVault.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using static System.Net.WebRequestMethods;
 
 namespace GameVault.Data.Configurations
 {
@@ -17,7 +18,7 @@ namespace GameVault.Data.Configurations
                     Description = "An open-world RPG following Geralt of Rivia on his search for Ciri.",
                     ReleaseYear = 2015,
                     Developer = "CD Projekt Red",
-                    ImageUrl = null,
+                    ImageUrl = "/images/games/Witcher3.png",
                     GenreId = 3
                 },
                 new Game
@@ -27,7 +28,7 @@ namespace GameVault.Data.Configurations
                     Description = "A remastered action RPG focused on character progression, loot and challenging combat.",
                     ReleaseYear = 2021,
                     Developer = "Blizzard Entertainment",
-                    ImageUrl = null,
+                    ImageUrl = "/images/games/D2R.png",
                     GenreId = 3
                 },
                 new Game
@@ -37,7 +38,7 @@ namespace GameVault.Data.Configurations
                     Description = "An open-world action RPG set in the mysterious Lands Between.",
                     ReleaseYear = 2022,
                     Developer = "FromSoftware",
-                    ImageUrl = null,
+                    ImageUrl = "/images/games/EldenRing.webp",
                     GenreId = 3
                 },
                 new Game
@@ -47,7 +48,7 @@ namespace GameVault.Data.Configurations
                     Description = "A competitive tactical first-person shooter focused on team-based matches.",
                     ReleaseYear = 2023,
                     Developer = "Valve",
-                    ImageUrl = null,
+                    ImageUrl = "/images/games/CS2.jpg",
                     GenreId = 5
                 },
                 new Game
@@ -57,7 +58,7 @@ namespace GameVault.Data.Configurations
                     Description = "A fast-paced first-person shooter featuring intense combat against demonic forces.",
                     ReleaseYear = 2020,
                     Developer = "id Software",
-                    ImageUrl = null,
+                    ImageUrl = "/images/games/DoomEternal.jpg",
                     GenreId = 5
                 },
                 new Game
@@ -67,7 +68,7 @@ namespace GameVault.Data.Configurations
                     Description = "A turn-based strategy game about building and developing a civilization.",
                     ReleaseYear = 2016,
                     Developer = "Firaxis Games",
-                    ImageUrl = null,
+                    ImageUrl = "/images/games/CivilizationVI.jpg",
                     GenreId = 4
                 },
                 new Game
@@ -77,7 +78,7 @@ namespace GameVault.Data.Configurations
                     Description = "A survival horror game following Leon Kennedy on a dangerous rescue mission.",
                     ReleaseYear = 2023,
                     Developer = "Capcom",
-                    ImageUrl = null,
+                    ImageUrl = "/images/games/RE4.jpg",
                     GenreId = 8
                 },
                 new Game
@@ -87,7 +88,7 @@ namespace GameVault.Data.Configurations
                     Description = "A flight simulation game featuring detailed aircraft and locations around the world.",
                     ReleaseYear = 2020,
                     Developer = "Asobo Studio",
-                    ImageUrl = null,
+                    ImageUrl = "/images/games/MFS2024.jpg",
                     GenreId = 6
                 },
                 new Game
@@ -97,7 +98,7 @@ namespace GameVault.Data.Configurations
                     Description = "A football simulation game featuring clubs, players and competitions from around the world.",
                     ReleaseYear = 2024,
                     Developer = "EA Sports",
-                    ImageUrl = null,
+                    ImageUrl = "/images/games/FC25.jpg",
                     GenreId = 7
                 },
                 new Game
@@ -107,7 +108,7 @@ namespace GameVault.Data.Configurations
                     Description = "An open-world adventure following outlaw Arthur Morgan and the Van der Linde gang.",
                     ReleaseYear = 2018,
                     Developer = "Rockstar Games",
-                    ImageUrl = null,
+                    ImageUrl = "/images/games/RDR2.webp",
                     GenreId = 2
                 }
             );
