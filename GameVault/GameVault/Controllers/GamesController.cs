@@ -1,6 +1,7 @@
 ﻿using GameVault.Data;
 using GameVault.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using static GameVault.Common.PageValidation;
 namespace GameVault.Controllers
 {
     public class GamesController : Controller
@@ -17,6 +18,7 @@ namespace GameVault.Controllers
             IEnumerable<Game> games = dbContext
                 .Games
                 .OrderByDescending(g => g.ReleaseYear)
+                .Take(EntitiesPerPage)
                 .ToArray();
 
             return View(games);

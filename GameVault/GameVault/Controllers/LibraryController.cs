@@ -1,6 +1,7 @@
 ﻿using GameVault.Data;
 using GameVault.Models;
 using Microsoft.AspNetCore.Mvc;
+using static GameVault.Common.PageValidation;
 
 namespace GameVault.Controllers
 {
@@ -18,6 +19,7 @@ namespace GameVault.Controllers
             IEnumerable<UserGame> userGames = dbContext
                 .UserGames
                 .OrderByDescending(ug => ug.HoursPlayed)
+                .Take(EntitiesPerPage)
                 .ToArray();
 
             return View(userGames);

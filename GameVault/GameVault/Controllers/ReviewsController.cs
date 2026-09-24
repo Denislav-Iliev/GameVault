@@ -1,6 +1,7 @@
 ﻿using GameVault.Data;
 using GameVault.Models;
 using Microsoft.AspNetCore.Mvc;
+using static GameVault.Common.PageValidation;
 
 namespace GameVault.Controllers
 {
@@ -19,6 +20,7 @@ namespace GameVault.Controllers
                 .Reviews
                 .OrderByDescending(r => r.CreatedOn)
                 .ThenByDescending(r => r.Rating)
+                .Take(EntitiesPerPage)
                 .ToArray();
 
             return View(reviews);
