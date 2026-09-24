@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GameVault.Controllers
 {
-    public class UserGamesController : Controller
+    public class LibraryController : Controller
     {
         private readonly GameVaultDbContext dbContext;
 
-        public UserGamesController(GameVaultDbContext dbContext)
+        public LibraryController(GameVaultDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
