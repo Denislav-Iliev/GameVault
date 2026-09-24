@@ -1,0 +1,50 @@
+﻿@model Game
+
+<div class="col-12 col-md-6 col-lg-4">
+    <div class="gv-card">
+
+        <div class="gv-game-image-wrapper">
+            <img src="@Model.ImageUrl"
+                 class="gv-game-image"
+                 alt="@Model.Title" />
+
+            <span class="gv-game-year">
+                @Model.ReleaseYear
+            </span>
+        </div>
+
+        <div class="gv-card-body">
+
+            <span class="gv-badge">
+                @Model.Genre.Name
+            </span>
+
+            <h2 class="gv-card-title mt-3">
+                @Model.Title
+            </h2>
+
+            <p class="gv-game-developer">
+                @Model.Developer
+            </p>
+
+            <p class="gv-card-text gv-game-description">
+                @Model.Description
+            </p>
+
+            <div class="gv-game-actions">
+
+                <a href="#"
+                   class="btn btn-gv-primary">
+                    Details
+                </a>
+
+                <a href="#"
+                   class="btn btn-gv-outline">
+                    Add to Library
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</div>

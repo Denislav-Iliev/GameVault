@@ -466,3 +466,80 @@ a {
         align-items: flex-start;
     }
 }
+
+/* =========================================================
+   GAME CARDS
+   ========================================================= */
+
+.gv-game-image-wrapper {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background: #0c0c10;
+}
+
+.gv-game-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease, opacity 300ms ease;
+}
+
+.gv-card:hover .gv-game-image {
+    transform: scale(1.04);
+    opacity: 0.85;
+}
+
+.gv-game-year {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 9px;
+    border: 1px solid rgba(255, 0, 60, 0.4);
+    border-radius: 5px;
+    background: rgba(5, 5, 6, 0.88);
+    color: #ff003c;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.gv-game-developer {
+    margin-top: 8px;
+    margin-bottom: 12px;
+    color: #6f6f7d;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.gv-game-description {
+    display: -webkit-box;
+    min-height: 48px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.5;
+}
+
+.gv-game-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 17px;
+    border-top: 1px solid var(--gv-border);
+}
+
+@media (max-width: 575.98px) {
+
+    .gv-game-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+        .gv-game-actions .btn {
+            width: 100%;
+        }
+}

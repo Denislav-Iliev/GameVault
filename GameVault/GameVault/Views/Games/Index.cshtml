@@ -1,5 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Game>
+
 @{
+    ViewData["Title"] = "Games";
 }
+
+<div class="gv-page-header">
+    <div class="gv-page-eyebrow">EXPLORE THE VAULT</div>
+
+    <h1 class="gv-page-title">
+        Games
+    </h1>
+
+    <p class="gv-page-description">
+        Discover games, explore different genres and find your next adventure.
+    </p>
+</div>
+
+
+<div class="row g-4">
+
+
+    @foreach (Game game in Model)
+    {
+		<partial name="_GameCardPartial" model="game" />
+    }
+
+</div>
