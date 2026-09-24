@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Genre>
+
+@{
+    ViewData["Title"] = "Genres";
+}
+
+<div class="gv-page-header">
+    <div class="gv-page-eyebrow">
+        BROWSE BY CATEGORY
+    </div>
+
+    <h1 class="gv-page-title">
+        Genres
+    </h1>
+
+    <p class="gv-page-description">
+        Explore the GameVault collection by genre.
+    </p>
+</div>
+
+<div class="row g-4">
+@foreach (Genre genre in Model)
+{
+	<partial name="_GenreCardPartial" model="genre" />
+}

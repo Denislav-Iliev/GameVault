@@ -1,0 +1,32 @@
+﻿@model Genre
+
+<div class="col-12 col-md-6 col-lg-4">
+    <div class="gv-genre-card">
+
+        <div class="gv-genre-number">
+            @Model.Id.ToString("00")
+        </div>
+
+        <div class="gv-genre-content">
+
+            <span class="gv-page-eyebrow">
+                GENRE
+            </span>
+
+            <h2 class="gv-genre-title">
+                @Model.Name
+            </h2>
+
+            <p class="gv-genre-description">
+                Explore games from this genre in the GameVault collection.
+            </p>
+
+            <a href="#" class="gv-genre-link">
+                EXPLORE GAMES
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </div>
+</div>

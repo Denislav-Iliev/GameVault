@@ -18,7 +18,7 @@ namespace GameVault.Controllers
         {
             IEnumerable<Genre> genres = dbContext
                 .Genres
-                .OrderBy(g => g.Name)
+                .OrderBy(g => g.Id)
                 .Take(EntitiesPerPage)
                 .ToArray();
 
