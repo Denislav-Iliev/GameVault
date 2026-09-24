@@ -1,0 +1,107 @@
+﻿@model Game
+
+@{
+    ViewData["Title"] = "Game Details";
+}
+
+<div class="gv-details">
+
+    <a asp-controller="Games"
+       asp-action="Index"
+       class="gv-details-back">
+        ← BACK TO GAMES
+    </a>
+
+    <div class="row g-5 align-items-start">
+
+        <div class="col-12 col-lg-6">
+            <div class="gv-details-image-wrapper">
+
+                <img src="@Model.ImageUrl"
+                     alt="@Model.Title"
+                     class="gv-details-image" />
+
+                <span class="gv-details-year">
+                    @Model.ReleaseYear
+                </span>
+
+            </div>
+        </div>
+
+
+        <div class="col-12 col-lg-6">
+
+            <div class="gv-details-content">
+
+                <span class="gv-page-eyebrow">
+                    GAME DETAILS
+                </span>
+
+                <span class="gv-badge gv-details-genre">
+                    @Model.Genre.Name
+                </span>
+
+                <h1 class="gv-details-title">
+                    @Model.Title
+                </h1>
+
+                <p class="gv-details-developer">
+                    DEVELOPED BY
+                    <span>@Model.Developer</span>
+                </p>
+
+                <div class="gv-details-divider"></div>
+
+                <div class="gv-details-section">
+                    <span class="gv-details-label">
+                        ABOUT THIS GAME
+                    </span>
+
+                    <p class="gv-details-description">
+                        @Model.Description
+                    </p>
+                </div>
+
+                <div class="gv-details-info">
+
+                    <div class="gv-details-info-item">
+                        <span class="gv-details-label">
+                            RELEASE YEAR
+                        </span>
+
+                        <strong>
+                            @Model.ReleaseYear
+                        </strong>
+                    </div>
+
+                    <div class="gv-details-info-item">
+                        <span class="gv-details-label">
+                            GENRE
+                        </span>
+
+                        <strong>
+                            @Model.Genre.Name
+                        </strong>
+                    </div>
+
+                </div>
+
+                <div class="gv-details-actions">
+
+                    <a href="#" class="btn btn-gv-primary">
+                        ADD TO LIBRARY
+                    </a>
+
+                    <a href="#" class="btn btn-gv-outline">
+                        WRITE REVIEW
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

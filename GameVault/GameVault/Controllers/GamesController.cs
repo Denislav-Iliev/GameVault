@@ -25,5 +25,21 @@ namespace GameVault.Controllers
 
             return View(games);
         }
+
+        public IActionResult Details(int id)
+        {
+            Game? game = dbContext
+                .Games
+                .Include(gr => gr.Genre)
+                .FirstOrDefault(g => g.Id == id);
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            return View(game);
+
+        }
     }
 }

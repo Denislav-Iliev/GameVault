@@ -33,7 +33,9 @@
 
             <div class="gv-game-actions">
 
-                <a href="#"
+                <a asp-controller="Games"
+                   asp-action="Details"
+                   asp-route-id="@Model.Id"
                    class="btn btn-gv-primary">
                     Details
                 </a>
