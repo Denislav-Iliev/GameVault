@@ -21,9 +21,8 @@
                 Explore games from this genre in the GameVault collection.
             </p>
 
-            <a href="#" class="gv-genre-link">
+            <a asp-controller="Games" asp-action="Index" asp-route-genreId="@Model.Id" class="gv-genre-link">
                 EXPLORE GAMES
-                <span>→</span>
             </a>
 
         </div>

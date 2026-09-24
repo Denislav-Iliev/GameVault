@@ -3,6 +3,14 @@
 @{
     ViewData["Title"] = "Games";
 }
+@if (ViewBag.GenreId != null)
+{
+    <a asp-controller="Genres"
+       asp-action="Index"
+       class="gv-details-back gv-back-genres">
+        ← BACK TO GENRES
+    </a>
+}
 
 <div class="gv-page-header">
     <div class="gv-page-eyebrow">EXPLORE THE VAULT</div>

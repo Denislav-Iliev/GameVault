@@ -14,16 +14,33 @@ namespace GameVault.Controllers
             this.dbContext = dbContext;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? genreId)
         {
-            IEnumerable<Game> games = dbContext
-                .Games
-                .Include(gr => gr.Genre)
-                .OrderByDescending(g => g.ReleaseYear)
-                .Take(EntitiesPerPage)         
-                .ToArray();
+            if (genreId == null)
+            {
+                IEnumerable<Game> games = dbContext
+                    .Games
+                    .Include(gr => gr.Genre)
+                    .OrderByDescending(g => g.ReleaseYear)
+                    .Take(EntitiesPerPage)
+                    .ToArray();
 
-            return View(games);
+                return View(games);
+            }
+            else
+            {
+                IEnumerable<Game> games = dbContext
+                    .Games
+                    .Where(g => g.GenreId == genreId)
+                    .Include(gr => gr.Genre)
+                    .OrderByDescending(g => g.ReleaseYear)
+                    .Take(EntitiesPerPage)
+                    .ToArray();
+
+                ViewBag.GenreId = genreId;
+
+                return View(games);
+            }
         }
 
         public IActionResult Details(int id)
