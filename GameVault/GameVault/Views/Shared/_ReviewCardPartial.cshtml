@@ -1,0 +1,41 @@
+﻿@model Review
+
+<div class="col-12 col-md-6 col-lg-4">
+    <div class="gv-review-card">
+
+        <div class="gv-review-header">
+            <div>
+                <span class="gv-page-eyebrow">
+                    REVIEW
+                </span>
+
+                <h2 class="gv-review-game">
+                    @Model.Game.Title
+                </h2>
+            </div>
+
+            <div class="gv-review-rating">
+                <span class="gv-review-score">@Model.Rating</span>
+                <span class="gv-review-max">/10</span>
+            </div>
+        </div>
+
+        <div class="gv-review-divider"></div>
+
+        <p class="gv-review-content">
+            @Model.Content
+        </p>
+
+        <div class="gv-review-footer">
+            <span class="gv-review-date">
+                @Model.CreatedOn.ToString("MMMM dd, yyyy")
+            </span>
+
+            <a href="#" class="gv-review-link">
+                VIEW GAME
+                <span>→</span>
+            </a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Review>
+
+@{
+    ViewData["Title"] = "Reviews";
+}
+
+<div class="gv-page-header">
+    <div class="gv-page-eyebrow">
+        COMMUNITY REVIEWS
+    </div>
+
+    <h1 class="gv-page-title">
+        Reviews
+    </h1>
+
+    <p class="gv-page-description">
+        See what players think about the games in the vault.
+    </p>
+</div>
+
+<div class="row g-4">
+    @foreach (Review review in Model)
+    {
+        <partial name="_ReviewCardPartial" model="review" />
+    }
+</div>
