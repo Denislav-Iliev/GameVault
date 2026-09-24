@@ -1,0 +1,75 @@
+﻿@model UserGame
+
+<div class="col-12 col-md-6 col-lg-4">
+    <div class="gv-library-card">
+
+        <div class="gv-library-image-wrapper">
+            <img src="@Model.Game.ImageUrl"
+                 class="gv-library-image"
+                 alt="@Model.Game.Title" />
+
+            <span class="gv-library-status">
+                @Model.Status
+            </span>
+        </div>
+
+        <div class="gv-library-body">
+
+            <h2 class="gv-library-title">
+                @Model.Game.Title
+            </h2>
+
+            <p class="gv-library-developer">
+                @Model.Game.Developer
+            </p>
+
+            <div class="gv-library-stats">
+
+                <div class="gv-library-stat">
+                    <span class="gv-library-stat-label">
+                        HOURS PLAYED
+                    </span>
+
+                    <span class="gv-library-stat-value">
+						@Model.HoursPlayed h
+                    </span>
+                </div>
+
+                <div class="gv-library-stat">
+                    <span class="gv-library-stat-label">
+                        ADDED
+                    </span>
+
+                    <span class="gv-library-stat-value">
+                        @Model.AddedOn.ToString("MMM dd, yyyy")
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="gv-library-notes">
+                <span class="gv-library-notes-label">
+                    NOTES
+                </span>
+
+                <p>
+                    @Model.Notes
+                </p>
+            </div>
+
+            <div class="gv-library-actions">
+
+                <a href="#" class="btn btn-gv-primary">
+                    VIEW GAME
+                </a>
+
+                <a href="#" class="btn btn-gv-outline">
+                    EDIT
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

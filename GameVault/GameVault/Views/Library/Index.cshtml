@@ -1,0 +1,26 @@
+﻿@model IEnumerable<UserGame>
+
+@{
+    ViewData["Title"] = "My Library";
+}
+
+<div class="gv-page-header">
+    <div class="gv-page-eyebrow">
+        YOUR COLLECTION
+    </div>
+
+    <h1 class="gv-page-title">
+        My Library
+    </h1>
+
+    <p class="gv-page-description">
+        Track your games, progress and playtime in one place.
+    </p>
+</div>
+
+<div class="row g-4">
+    @foreach (UserGame userGame in Model)
+    {
+        <partial name="_LibraryCardPartial" model="userGame" />
+    }
+</div>
