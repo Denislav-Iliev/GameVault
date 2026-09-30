@@ -4,13 +4,19 @@
     {
         public const int MaxGenreNameLength = 50;
 
+        public const int GameTitleMinLength = 2;
+
         public const int GameTitleMaxLength = 100;
+
+        public const int GameDescriptionMinLength = 20;
 
         public const int GameDescriptionMaxLength = 2000;
 
         public const int GameReleaseYearMin = 1950;
 
         public const int GameReleaseYearMax = 2026;
+
+        public const int GameDeveloperMinLength = 5;
 
         public const int GameDeveloperNameMaxLength = 100;
 

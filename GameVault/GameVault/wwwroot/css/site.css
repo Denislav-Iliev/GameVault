@@ -1029,3 +1029,140 @@ a {
         border-color: rgba(255, 255, 255, 0.3);
         background: rgba(255, 255, 255, 0.08);
     }
+
+/* =========================
+   GAMEVAULT - CREATE GAME
+   ========================= */
+
+.gv-create-page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 20px 0 70px;
+}
+
+.gv-create-header {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.gv-create-eyebrow {
+    color: #ff003c;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+}
+
+.gv-create-header h1 {
+    color: #fff;
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.gv-create-header p {
+    color: #85858f;
+    font-size: 16px;
+    margin: 0;
+}
+
+.gv-create-panel {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    padding: 38px;
+}
+
+.gv-form-group {
+    margin-bottom: 27px;
+}
+
+.gv-form-label {
+    display: block;
+    color: #c7c7ce;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1.7px;
+    margin-bottom: 9px;
+}
+
+.gv-form-control {
+    background: #101014;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 7px;
+    color: #fff;
+    padding: 13px 15px;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+    .gv-form-control:focus {
+        background: #101014;
+        color: #fff;
+        border-color: #ff003c;
+        box-shadow: 0 0 0 3px rgba(255, 0, 60, .10);
+    }
+
+    .gv-form-control::placeholder {
+        color: #55555e;
+    }
+
+select.gv-form-control {
+    color: #d5d5da;
+}
+
+.gv-textarea {
+    resize: vertical;
+    min-height: 145px;
+}
+
+.gv-field-error {
+    display: block;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+.gv-validation-summary {
+    margin-bottom: 22px;
+}
+
+.gv-form-hint {
+    color: #62626b;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.gv-create-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 10px;
+}
+
+.gv-btn-cancel {
+    padding: 12px 24px;
+    border: 1px solid rgba(255,255,255,.14);
+    color: #aaaab2;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+    .gv-btn-cancel:hover {
+        background: rgba(255,255,255,.06);
+        color: #fff;
+    }
+
+.gv-btn-submit {
+    padding: 12px 27px;
+    background: #ff003c;
+    border: 1px solid #ff003c;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+    .gv-btn-submit:hover {
+        background: #d90033;
+        border-color: #d90033;
+        color: #fff;
+    }

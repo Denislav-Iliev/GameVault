@@ -1,0 +1,194 @@
+﻿@model GameFormViewModel
+
+@{
+    ViewData["Title"] = "Add Game";
+}
+
+<div class="gv-create-page">
+
+    <a asp-controller="Games"
+       asp-action="Index"
+       class="gv-details-back">
+        ← BACK TO GAMES
+    </a>
+
+    <div class="gv-create-header">
+        <div class="gv-create-eyebrow">GAMEVAULT DATABASE</div>
+        <h1>ADD NEW GAME</h1>
+        <p>Add a new title to the GameVault catalogue.</p>
+    </div>
+
+
+    <div class="gv-create-panel">
+
+        <form asp-controller="Games"
+              asp-action="Create"
+              method="post"
+              class="gv-create-form">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger gv-validation-summary">
+            </div>
+
+
+            <div class="gv-form-group">
+
+                <label asp-for="Title"
+                       class="gv-form-label">
+                    TITLE
+                </label>
+
+                <input asp-for="Title"
+                       class="form-control gv-form-control"
+                       placeholder="e.g. The Witcher 3: Wild Hunt" />
+
+                <span asp-validation-for="Title"
+                      class="text-danger gv-field-error">
+                </span>
+
+            </div>
+
+
+            <div class="gv-form-group">
+
+                <label asp-for="Description"
+                       class="gv-form-label">
+                    DESCRIPTION
+                </label>
+
+                <textarea asp-for="Description"
+                          class="form-control gv-form-control gv-textarea"
+                          rows="6"
+                          placeholder="Write a short description of the game...">
+                </textarea>
+
+                <span asp-validation-for="Description"
+                      class="text-danger gv-field-error">
+                </span>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="gv-form-group">
+
+                        <label asp-for="ReleaseYear"
+                               class="gv-form-label">
+                            RELEASE YEAR
+                        </label>
+
+                        <input asp-for="ReleaseYear"
+                               class="form-control gv-form-control"
+                               placeholder="e.g. 2025" />
+
+                        <span asp-validation-for="ReleaseYear"
+                              class="text-danger gv-field-error">
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="gv-form-group">
+
+                        <label asp-for="Developer"
+                               class="gv-form-label">
+                            DEVELOPER
+                        </label>
+
+                        <input asp-for="Developer"
+                               class="form-control gv-form-control"
+                               placeholder="e.g. CD Projekt Red" />
+
+                        <span asp-validation-for="Developer"
+                              class="text-danger gv-field-error">
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="gv-form-group">
+
+                <label asp-for="GenreId"
+                       class="gv-form-label">
+                    GENRE
+                </label>
+
+                <select asp-for="GenreId"
+                        class="form-select gv-form-control">
+
+                    <option value="0">-- Select Genre --</option>
+
+                    @foreach (Genre genre in Model.Genres)
+                    {
+                        <option value="@genre.Id">
+                            @genre.Name
+                        </option>
+                    }
+
+                </select>
+
+                <span asp-validation-for="GenreId"
+                      class="text-danger gv-field-error">
+                </span>
+
+            </div>
+
+
+            <div class="gv-form-group">
+
+                <label asp-for="ImageUrl"
+                       class="gv-form-label">
+                    IMAGE URL
+                </label>
+
+                <input asp-for="ImageUrl"
+                       class="form-control gv-form-control"
+                       placeholder="/images/games/example.jpg" />
+
+                <span asp-validation-for="ImageUrl"
+                      class="text-danger gv-field-error">
+                </span>
+
+                <div class="gv-form-hint">
+                    Optional — enter a local image path or image URL.
+                </div>
+
+            </div>
+
+
+            <div class="gv-create-actions">
+
+                <a asp-controller="Games"
+                   asp-action="Index"
+                   class="btn gv-btn-cancel">
+                    CANCEL
+                </a>
+
+                <button type="submit"
+                        class="btn gv-btn-submit">
+                    + ADD GAME
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

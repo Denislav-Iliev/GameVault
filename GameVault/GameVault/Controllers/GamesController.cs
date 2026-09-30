@@ -1,5 +1,6 @@
 ﻿using GameVault.Data;
 using GameVault.ViewModels;
+using GameVault.ViewModels.Games;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static GameVault.Common.PageValidation;
@@ -59,6 +60,18 @@ namespace GameVault.Controllers
 
             return View(game);
 
+        }
+
+        [HttpGet] public IActionResult Create()
+        {
+            GameFormViewModel model = new();
+
+            model.Genres = dbContext
+                .Genres
+                .OrderBy(g => g.Name)
+                .ToArray();
+            
+            return View(model);
         }
     }
 }

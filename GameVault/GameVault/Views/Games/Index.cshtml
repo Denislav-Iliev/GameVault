@@ -13,15 +13,29 @@
 }
 
 <div class="gv-page-header">
-    <div class="gv-page-eyebrow">EXPLORE THE VAULT</div>
 
-    <h1 class="gv-page-title">
-        Games
-    </h1>
+    <div class="d-flex justify-content-between align-items-end">
 
-    <p class="gv-page-description">
-        Discover games, explore different genres and find your next adventure.
-    </p>
+        <div>
+            <div class="gv-page-eyebrow">EXPLORE THE VAULT</div>
+
+            <h1 class="gv-page-title">
+                Games
+            </h1>
+
+            <p class="gv-page-description">
+                Discover games, explore different genres and find your next adventure.
+            </p>
+        </div>
+
+        <a asp-controller="Games"
+           asp-action="Create"
+           class="btn gv-btn-submit">
+            + ADD GAME
+        </a>
+
+    </div>
+
 </div>
 
 
