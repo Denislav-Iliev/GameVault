@@ -14,6 +14,7 @@ namespace GameVault.Controllers
             this.dbContext = dbContext;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             IEnumerable<Genre> genres = dbContext

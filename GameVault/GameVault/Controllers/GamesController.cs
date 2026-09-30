@@ -14,6 +14,7 @@ namespace GameVault.Controllers
             this.dbContext = dbContext;
         }
 
+        [HttpGet]
         public IActionResult Index(int? genreId)
         {
             if (genreId == null)
@@ -43,6 +44,7 @@ namespace GameVault.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult Details(int id)
         {
             Game? game = dbContext
