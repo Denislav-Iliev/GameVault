@@ -3,6 +3,8 @@ using GameVault.ViewModels;
 using GameVault.ViewModels.Games;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using static GameVault.Common.PageValidation;
 namespace GameVault.Controllers
 {
@@ -16,33 +18,38 @@ namespace GameVault.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int? genreId)
+        public IActionResult Index([FromQuery]int? genreId, [FromQuery]string? searchTerm)
         {
-            if (genreId == null)
-            {
-                IEnumerable<Game> games = dbContext
+            var gamesQuery = dbContext
                     .Games
-                    .Include(gr => gr.Genre)
-                    .OrderByDescending(g => g.ReleaseYear)
-                    .Take(EntitiesPerPage)
-                    .ToArray();
+                    .Include(g => g.Genre)
+                    .AsQueryable();
 
-                return View(games);
-            }
-            else
+            if (genreId != null)
             {
-                IEnumerable<Game> games = dbContext
-                    .Games
-                    .Where(g => g.GenreId == genreId)
-                    .Include(gr => gr.Genre)
+                gamesQuery = gamesQuery
+                    .Where(g => g.GenreId == genreId);
+            }
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                gamesQuery = gamesQuery.Where(e => EF.Functions.Like(e.Title, $"%{searchTerm}%"));
+            }
+
+
+                IEnumerable<Game> games = gamesQuery
                     .OrderByDescending(g => g.ReleaseYear)
                     .Take(EntitiesPerPage)
                     .ToArray();
 
                 ViewBag.GenreId = genreId;
 
-                return View(games);
-            }
+
+                ViewBag.Genres = dbContext
+                    .Genres
+                    .OrderBy(g => g.Name)
+                    .ToArray();
+
+            return View(games);
         }
 
         [HttpGet]
@@ -72,6 +79,62 @@ namespace GameVault.Controllers
                 .ToArray();
             
             return View(model);
+        }
+
+        [HttpPost] public IActionResult Create(GameFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid data was detected!");
+                model.Genres = LoadAllGenres();
+
+                return View(model);
+            }
+
+            if (model.ReleaseYear > DateTime.Today.Year)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid release year was detected!");
+                model.Genres = LoadAllGenres();
+
+                return View(model);
+            }
+
+            bool genreExists = dbContext
+                .Genres
+                .Any(g => g.Id == model.GenreId);
+
+            if (!genreExists)
+            {
+                ModelState.AddModelError(nameof(model.GenreId), "Invalid genre was selected!");
+                model.Genres = LoadAllGenres();
+
+                return View(model);
+            }
+
+            Game newGame = new Game
+            {
+                Title = model.Title,
+                Description = model.Description,
+                ReleaseYear = model.ReleaseYear,
+                Developer = model.Developer,
+                ImageUrl = model.ImageUrl,
+                GenreId = model.GenreId
+            };
+
+            dbContext.Games.Add(newGame);
+            dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private IEnumerable<Genre> LoadAllGenres()
+        {
+            IEnumerable<Genre> allGenres = dbContext
+                .Genres
+                .OrderBy(g => g.Name)
+                .ToArray();
+
+            return allGenres;
         }
     }
 }

@@ -1166,3 +1166,260 @@ select.gv-form-control {
         border-color: #d90033;
         color: #fff;
     }
+
+.gv-filter-bar {
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    background: #111;
+    border: 1px solid #292929;
+    border-radius: 8px;
+}
+
+.gv-filter-form {
+    display: flex;
+    align-items: end;
+    gap: 1rem;
+}
+
+.gv-filter-item {
+    min-width: 200px;
+}
+
+.gv-filter-search {
+    flex: 1;
+}
+
+.gv-filter-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #aaa;
+}
+
+.gv-filter-control {
+    background: #181818;
+    border: 1px solid #333;
+    color: #fff;
+}
+
+    .gv-filter-control:focus {
+        background: #181818;
+        color: #fff;
+        border-color: #ff003c;
+        box-shadow: none;
+    }
+
+    .gv-filter-control::placeholder {
+        color: #666;
+    }
+
+.gv-filter-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.gv-btn-clear {
+    border: 1px solid #444;
+    color: #aaa;
+}
+
+    .gv-btn-clear:hover {
+        border-color: #777;
+        color: #fff;
+    }
+
+@media (max-width: 768px) {
+    .gv-filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .gv-filter-item {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   GAMEVAULT - GAMES SEARCH BAR
+   ======================================== */
+
+.gv-search-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 58px;
+    margin-top: 2rem;
+    background: #111114;
+    border: 1px solid #29292f;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+    /* Glow around the whole search bar when using it */
+    .gv-search-bar:focus-within {
+        border-color: #ff003c;
+        box-shadow: 0 0 0 1px rgba(255, 0, 60, 0.15), 0 0 24px rgba(255, 0, 60, 0.08);
+    }
+
+
+/* Search section */
+.gv-search-input {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+    padding: 0 20px;
+}
+
+
+/* Search icon */
+.gv-search-icon {
+    margin-right: 12px;
+    color: #ff003c;
+    font-size: 22px;
+}
+
+
+/* Actual search input */
+.gv-search-input input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: #fff;
+    font-size: 15px;
+}
+
+    .gv-search-input input::placeholder {
+        color: #666672;
+    }
+
+
+/* Small divider between Search and Genre */
+.gv-search-divider {
+    width: 1px;
+    height: 26px;
+    background: #303038;
+}
+
+
+/* Genre dropdown */
+.gv-search-genre {
+    width: 180px;
+    height: 100%;
+    padding: 0 18px;
+    background: #111114;
+    border: 0;
+    outline: 0;
+    color: #bbb;
+    cursor: pointer;
+}
+
+    .gv-search-genre option {
+        background: #111114;
+        color: #fff;
+    }
+
+
+/* Search button */
+.gv-search-button {
+    align-self: stretch;
+    padding: 0 30px;
+    border: 0;
+    background: #ff003c;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+    .gv-search-button:hover {
+        background: #e60036;
+    }
+
+
+/* Clear Filters under search */
+.gv-filter-clear {
+    height: 26px;
+    margin-top: 7px;
+    text-align: right;
+}
+
+    .gv-filter-clear a {
+        color: #666;
+        font-size: 12px;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+        .gv-filter-clear a:hover {
+            color: #ff003c;
+        }
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .gv-search-bar {
+        height: auto;
+        flex-wrap: wrap;
+    }
+
+    .gv-search-input {
+        height: 56px;
+        flex-basis: 100%;
+    }
+
+    .gv-search-divider {
+        display: none;
+    }
+
+    .gv-search-genre {
+        flex: 1;
+        height: 50px;
+    }
+
+    .gv-search-button {
+        height: 50px;
+    }
+}
+
+/* Genre dropdown - GameVault accent */
+.gv-search-genre {
+    color: #ff003c;
+    font-weight: 700;
+}
+
+    .gv-search-genre:hover {
+        background: #18181d;
+    }
+
+/* Clear button inside search bar */
+.gv-search-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    padding: 0 22px;
+    background: #111114;
+    border-left: 1px solid #303038;
+    color: #888;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+    .gv-search-clear:hover {
+        background: #18181d;
+        color: #ff003c;
+    }

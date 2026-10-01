@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Games";
 }
+
 @if (ViewBag.GenreId != null)
 {
     <a asp-controller="Genres"
@@ -39,12 +40,58 @@
 </div>
 
 
-<div class="row g-4">
+<form asp-controller="Games"
+      asp-action="Index"
+      method="get"
+      class="gv-search-bar">
 
+    <div class="gv-search-input">
+
+        <span class="gv-search-icon">⌕</span>
+
+        <input type="text"
+               name="searchTerm"
+               placeholder="Search the vault..."
+               autocomplete="off" />
+
+    </div>
+
+    <div class="gv-search-divider"></div>
+
+    <select name="genreId"
+            class="gv-search-genre">
+
+        <option value="">All Genres</option>
+
+        @foreach (Genre genre in ViewBag.Genres)
+        {
+            <option value="@genre.Id">
+                @genre.Name
+            </option>
+        }
+
+    </select>
+
+    <button type="submit"
+            class="gv-search-button">
+        SEARCH
+    </button>
+
+    <a asp-controller="Games"
+       asp-action="Index"
+       class="gv-search-clear">
+        CLEAR
+    </a>
+
+</form>
+
+
+<div class="row g-4 mt-3">
 
     @foreach (Game game in Model)
     {
-		<partial name="_GameCardPartial" model="game" />
+        <partial name="_GameCardPartial"
+                 model="game" />
     }
 
 </div>
