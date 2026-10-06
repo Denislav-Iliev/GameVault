@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using static GameVault.Common.PageValidation;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace GameVault.Controllers
 {
     public class GamesController : Controller
@@ -69,7 +70,8 @@ namespace GameVault.Controllers
 
         }
 
-        [HttpGet] public IActionResult Create()
+        [HttpGet]
+        public IActionResult Create()
         {
             GameFormViewModel model = new();
 
@@ -81,7 +83,8 @@ namespace GameVault.Controllers
             return View(model);
         }
 
-        [HttpPost] public IActionResult Create(GameFormViewModel model)
+        [HttpPost] 
+        public IActionResult Create(GameFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -125,6 +128,38 @@ namespace GameVault.Controllers
             dbContext.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Edit([FromRoute]int? id)
+        {
+            if (!id.HasValue || id.Value <= 0)
+            {
+                return BadRequest("There was an error with your request! Please try again!");
+            }
+
+            Game? gameToEdit = dbContext
+                .Games
+                .FirstOrDefault(g => g.Id == id.Value);
+
+            if (gameToEdit == null)
+            {
+                return NotFound();
+            }
+
+            GameFormViewModel model = new GameFormViewModel()
+            {
+                Description = gameToEdit.Description,
+                Title = gameToEdit.Title,
+                ReleaseYear = gameToEdit.ReleaseYear,
+                Developer = gameToEdit.Developer,
+                ImageUrl = gameToEdit.ImageUrl,
+                GenreId = gameToEdit.GenreId,
+
+                Genres = LoadAllGenres()
+            };
+
+            return View(model);
         }
 
         private IEnumerable<Genre> LoadAllGenres()
