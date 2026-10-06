@@ -162,6 +162,64 @@ namespace GameVault.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Edit([FromRoute]int id, GameFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid data was detected!");
+                model.Genres = LoadAllGenres();
+
+                return View(model);
+            }
+
+            if (model.ReleaseYear > DateTime.Today.Year)
+            {
+                ModelState.AddModelError(
+                    nameof(model.ReleaseYear),
+                    "Invalid release year was detected!");
+
+                model.Genres = LoadAllGenres();
+
+                return View(model);
+            }
+
+            bool genreExists = dbContext
+                .Genres
+                .Any(g => g.Id == model.GenreId);
+
+            if (!genreExists)
+            {
+                ModelState.AddModelError(
+                    nameof(model.GenreId),
+                    "Invalid genre was selected!");
+
+                model.Genres = LoadAllGenres();
+
+                return View(model);
+            }
+
+            Game? gameToEdit = dbContext
+                .Games
+                .FirstOrDefault(g => g.Id == id);
+
+            if (gameToEdit == null)
+            {
+                return NotFound();
+            }
+
+            gameToEdit.Description = model.Description;
+            gameToEdit.Developer = model.Developer;
+            gameToEdit.GenreId = model.GenreId;
+            gameToEdit.ImageUrl = model.ImageUrl;
+            gameToEdit.ReleaseYear = model.ReleaseYear;
+            gameToEdit.Title = model.Title;
+
+            dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         private IEnumerable<Genre> LoadAllGenres()
         {
             IEnumerable<Genre> allGenres = dbContext
