@@ -1,0 +1,66 @@
+﻿@model GameDeleteViewModel
+
+@{
+    ViewData["Title"] = "Delete Game";
+}
+
+<div class="gv-create-page">
+
+    <div class="gv-create-header">
+        <div class="gv-page-eyebrow">
+            MANAGE THE VAULT
+        </div>
+
+        <h1 class="gv-page-title">
+            Delete Game
+        </h1>
+
+        <p class="gv-page-description">
+            Permanently remove a game from the vault.
+        </p>
+    </div>
+
+    <div class="gv-create-panel">
+
+        <div class="text-center">
+
+            <h2 class="text-white mb-3">
+                Are you sure?
+            </h2>
+
+            <p class="text-secondary mb-2">
+                You are about to permanently delete
+                <strong class="text-white">@Model.Title</strong>.
+            </p>
+
+            <p class="text-danger mb-4">
+                This action cannot be undone.
+            </p>
+
+            <form asp-controller="Games"
+                  asp-action="Delete"
+                  asp-route-id="@Model.Id"
+                  method="post">
+
+                <div class="d-flex justify-content-center gap-3">
+
+                    <a asp-controller="Games"
+                       asp-action="Index"
+                       class="btn btn-gv-outline">
+                        CANCEL
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-danger">
+                        DELETE GAME
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

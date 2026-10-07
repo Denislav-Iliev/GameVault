@@ -45,12 +45,23 @@
                     Add to Library
                 </a>
 
-                <a asp-controller="Games"
-                   asp-action="Edit"
-                   asp-route-id="@Model.Id"
-                   class="btn gv-btn-edit">
-                    EDIT
-                </a>
+                <div class="gv-card-manage-actions">
+
+                    <a asp-controller="Games"
+                       asp-action="Edit"
+                       asp-route-id="@Model.Id"
+                       class="btn gv-btn-edit">
+                        EDIT
+                    </a>
+
+                    <a asp-controller="Games"
+                       asp-action="Delete"
+                       asp-route-id="@Model.Id"
+                       class="btn gv-btn-delete-card">
+                        DELETE
+                    </a>
+
+                </div>
 
             </div>
 
