@@ -247,6 +247,29 @@ namespace GameVault.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest(
+                    "There was an error with your request! Please try again!");
+            }
+
+            Game? gameToDelete = dbContext.Games
+                .FirstOrDefault(g => g.Id == id);
+
+            if (gameToDelete == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.Games.Remove(gameToDelete);
+            dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         private IEnumerable<Genre> LoadAllGenres()
         {
             IEnumerable<Genre> allGenres = dbContext
