@@ -1,6 +1,6 @@
 ﻿using GameVault.Data;
 using GameVault.Data.Models;
-using GameVault.ViewModels;
+using GameVault.Services.Core.Models.Games;
 using Microsoft.AspNetCore.Mvc;
 using static GameVault.GCommon.PageValidation;
 

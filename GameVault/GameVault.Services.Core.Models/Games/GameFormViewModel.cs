@@ -2,7 +2,7 @@
 using static GameVault.GCommon.EntityValidation;
 using GameVault.Data.Models;
 
-namespace GameVault.ViewModels.Games
+namespace GameVault.Services.Core.Models.Games
 {
     public class GameFormViewModel
     {

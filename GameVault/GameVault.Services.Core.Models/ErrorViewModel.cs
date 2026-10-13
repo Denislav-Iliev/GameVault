@@ -1,4 +1,4 @@
-namespace GameVault.ViewModels
+namespace GameVault.Services.Core.Models
 {
     public class ErrorViewModel
     {

@@ -1,4 +1,4 @@
-﻿namespace GameVault.ViewModels.Games
+﻿namespace GameVault.Services.Core.Models.Games
 {
     public class GameDeleteViewModel
     {

@@ -1,11 +1,10 @@
 ﻿using GameVault.Data;
 using GameVault.Data.Models;
-using GameVault.ViewModels;
-using GameVault.ViewModels.Games;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
+using GameVault.Services.Core.Models.Games;
 using static GameVault.GCommon.PageValidation;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace GameVault.Controllers
