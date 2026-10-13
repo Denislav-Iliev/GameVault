@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="GameVault.Data.Models/GameVault.Data.Models.csproj" Id="dc5ff630-ad98-4b18-898b-ad7efd1ff56c" />
+  <Project Path="GameVault.Data/GameVault.Data.csproj" Id="80e9b7ff-d552-4af2-9879-d44a261fdf2d" />
+  <Project Path="GameVault.GCommon/GameVault.GCommon.csproj" Id="4a4d22c9-5d16-45cc-9d6e-ace1204813a0" />
   <Project Path="GameVault/GameVault.csproj" />
 </Solution>

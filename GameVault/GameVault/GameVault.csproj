@@ -18,4 +18,10 @@
     <Folder Include="wwwroot\images\games\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GameVault.Data.Models\GameVault.Data.Models.csproj" />
+    <ProjectReference Include="..\GameVault.Data\GameVault.Data.csproj" />
+    <ProjectReference Include="..\GameVault.GCommon\GameVault.GCommon.csproj" />
+  </ItemGroup>
+
 </Project>
