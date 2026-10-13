@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GameVault.Data\GameVault.Data.csproj" />
     <ProjectReference Include="..\GameVault.GCommon\GameVault.GCommon.csproj" />
+    <ProjectReference Include="..\GameVault.Services.Core.Models\GameVault.Services.Core.Models.csproj" />
   </ItemGroup>
 
 </Project>

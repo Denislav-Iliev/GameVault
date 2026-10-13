@@ -2,6 +2,7 @@
   <Project Path="GameVault.Data.Models/GameVault.Data.Models.csproj" Id="dc5ff630-ad98-4b18-898b-ad7efd1ff56c" />
   <Project Path="GameVault.Data/GameVault.Data.csproj" Id="80e9b7ff-d552-4af2-9879-d44a261fdf2d" />
   <Project Path="GameVault.GCommon/GameVault.GCommon.csproj" Id="4a4d22c9-5d16-45cc-9d6e-ace1204813a0" />
+  <Project Path="GameVault.Services.Core.Models/GameVault.Services.Core.Models.csproj" Id="88f9a482-b34b-41fb-bf8a-e6d647b41bfb" />
   <Project Path="GameVault.Services.Core/GameVault.Services.Core.csproj" Id="282e55bd-a95c-4f6c-a16c-cd2a52d1bc54" />
   <Project Path="GameVault/GameVault.csproj" />
 </Solution>
