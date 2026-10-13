@@ -1,9 +1,8 @@
-﻿using GameVault.ViewModels;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static GameVault.Common.EntityValidation;
+using static GameVault.GCommon.EntityValidation;
 
-namespace GameVault.Models
+namespace GameVault.Data.Models
 {
     public class Review
     {

@@ -1,7 +1,8 @@
 ﻿using GameVault.Data;
+using GameVault.Data.Models;
 using GameVault.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using static GameVault.Common.PageValidation;
+using static GameVault.GCommon.PageValidation;
 
 namespace GameVault.Controllers
 {

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static GameVault.Common.EntityValidation;
+using static GameVault.GCommon.EntityValidation;
+using GameVault.Data.Models;
 
 namespace GameVault.ViewModels.Games
 {

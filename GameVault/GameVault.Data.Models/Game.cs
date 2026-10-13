@@ -1,9 +1,9 @@
-﻿using GameVault.Models;
+﻿using GameVault.Data.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static GameVault.Common.EntityValidation;
+using static GameVault.GCommon.EntityValidation;
 
-namespace GameVault.ViewModels
+namespace GameVault.Data.Models
 {
     public class Game
     {

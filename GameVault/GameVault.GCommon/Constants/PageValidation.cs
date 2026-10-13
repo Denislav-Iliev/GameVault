@@ -1,4 +1,4 @@
-﻿namespace GameVault.Common
+﻿namespace GameVault.GCommon
 {
     public static class PageValidation
     {

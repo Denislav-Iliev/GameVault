@@ -22,7 +22,7 @@ namespace GameVault.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GameVault.Models.Review", b =>
+            modelBuilder.Entity("GameVault.Data.Models.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace GameVault.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("GameVault.Models.UserGame", b =>
+            modelBuilder.Entity("GameVault.Data.Models.UserGame", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -296,7 +296,7 @@ namespace GameVault.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GameVault.Models.Review", b =>
+            modelBuilder.Entity("GameVault.Data.Models.Review", b =>
                 {
                     b.HasOne("GameVault.ViewModels.Game", "Game")
                         .WithMany("Reviews")
@@ -307,7 +307,7 @@ namespace GameVault.Migrations
                     b.Navigation("Game");
                 });
 
-            modelBuilder.Entity("GameVault.Models.UserGame", b =>
+            modelBuilder.Entity("GameVault.Data.Models.UserGame", b =>
                 {
                     b.HasOne("GameVault.ViewModels.Game", "Game")
                         .WithMany("UserGames")

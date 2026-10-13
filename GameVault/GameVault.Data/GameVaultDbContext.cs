@@ -1,5 +1,4 @@
-﻿using GameVault.Models;
-using GameVault.ViewModels;
+﻿using GameVault.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameVault.Data
