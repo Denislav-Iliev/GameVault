@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Game>
+﻿@model IEnumerable<GameListDto>
 
 @{
     ViewData["Title"] = "Games";
@@ -63,7 +63,7 @@
 
         <option value="">All Genres</option>
 
-        @foreach (Genre genre in ViewBag.Genres)
+        @foreach (var genre in ViewBag.Genres)
         {
             <option value="@genre.Id">
                 @genre.Name
@@ -88,7 +88,7 @@
 
 <div class="row g-4 mt-3">
 
-    @foreach (Game game in Model)
+    @foreach (var game in Model)
     {
         <partial name="_GameCardPartial"
                  model="game" />

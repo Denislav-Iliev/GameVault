@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Genre>
+﻿@model IEnumerable<GenreDto>
 
 @{
     ViewData["Title"] = "Genres";
@@ -19,7 +19,7 @@
 </div>
 
 <div class="row g-4">
-@foreach (Genre genre in Model)
+@foreach (GenreDto genre in Model)
 {
 	<partial name="_GenreCardPartial" model="genre" />
 }

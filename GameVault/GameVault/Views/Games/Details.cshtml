@@ -1,4 +1,4 @@
-﻿@model Game
+﻿@model GameDetailsDto
 
 @{
     ViewData["Title"] = "Game Details";
@@ -38,7 +38,7 @@
                 </span>
 
                 <span class="gv-badge gv-details-genre">
-                    @Model.Genre.Name
+                    @Model.GenreName
                 </span>
 
                 <h1 class="gv-details-title">
@@ -80,7 +80,7 @@
                         </span>
 
                         <strong>
-                            @Model.Genre.Name
+                            @Model.GenreName
                         </strong>
                     </div>
 

@@ -1,31 +1,27 @@
-﻿using GameVault.Data;
+﻿
 using GameVault.Data.Models;
+using GameVault.Services.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using static GameVault.GCommon.PageValidation;
 
 namespace GameVault.Controllers
 {
     public class GenresController : Controller
     {
-        private readonly GameVaultDbContext dbContext;
+        private readonly IGenreService genreService;
 
-        public GenresController(GameVaultDbContext dbContext)
+        public GenresController(IGenreService genreService)
         {
-            this.dbContext = dbContext;
+            this.genreService = genreService;
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Genre> genres = await dbContext
-                .Genres
-                .AsNoTracking()
-                .OrderBy(g => g.Id)
-                .Take(EntitiesPerPage)
-                .ToArrayAsync();
+            var genres = await genreService.GetAllAsync();
 
             return View(genres);
         }
+
     }
 }

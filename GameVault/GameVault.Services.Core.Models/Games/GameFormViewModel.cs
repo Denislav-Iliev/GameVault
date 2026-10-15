@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static GameVault.GCommon.EntityValidation;
-using GameVault.Data.Models;
+using GameVault.Services.Core.Models.Genres;
 
 namespace GameVault.Services.Core.Models.Games
 {
@@ -29,6 +29,6 @@ namespace GameVault.Services.Core.Models.Games
         [Range(1, int.MaxValue, ErrorMessage = "Please select a genre.")]
         public int GenreId { get; set; }
 
-        public IEnumerable<Genre> Genres { get; set; } = new List<Genre>();
+        public IEnumerable<GenreDto> Genres { get; set; } = new List<GenreDto>();
     }
 }

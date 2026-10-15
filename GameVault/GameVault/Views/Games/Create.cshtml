@@ -129,7 +129,7 @@
 
                     <option value="0">-- Select Genre --</option>
 
-                    @foreach (Genre genre in Model.Genres)
+                    @foreach (var genre in Model.Genres)
                     {
                         <option value="@genre.Id">
                             @genre.Name
