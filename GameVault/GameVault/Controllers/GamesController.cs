@@ -1,12 +1,10 @@
 ﻿using GameVault.Data;
 using GameVault.Data.Models;
+using GameVault.Services.Core.Models.Games;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.IdentityModel.Tokens;
-using GameVault.Services.Core.Models.Games;
 using static GameVault.GCommon.PageValidation;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
 namespace GameVault.Controllers
 {
     public class GamesController : Controller
@@ -19,47 +17,47 @@ namespace GameVault.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index([FromQuery]int? genreId, [FromQuery]string? searchTerm)
+        public async Task<IActionResult> Index(
+            [FromQuery] int? genreId,
+            [FromQuery] string? searchTerm)
         {
-            var gamesQuery = dbContext
-                    .Games
-                    .Include(g => g.Genre)
-                    .AsQueryable();
+            IQueryable<Game> gamesQuery = dbContext
+                .Games
+                .Include(g => g.Genre)
+                .AsNoTracking();
 
             if (genreId != null)
             {
                 gamesQuery = gamesQuery
                     .Where(g => g.GenreId == genreId);
             }
+
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                gamesQuery = gamesQuery.Where(e => EF.Functions.Like(e.Title, $"%{searchTerm}%"));
+                gamesQuery = gamesQuery
+                    .Where(g => EF.Functions.Like(g.Title, $"%{searchTerm}%"));
             }
 
+            IEnumerable<Game> games = await gamesQuery
+                .OrderByDescending(g => g.ReleaseYear)
+                .Take(EntitiesPerPage)
+                .ToArrayAsync();
 
-                IEnumerable<Game> games = gamesQuery
-                    .OrderByDescending(g => g.ReleaseYear)
-                    .Take(EntitiesPerPage)
-                    .ToArray();
+            ViewBag.GenreId = genreId;
 
-                ViewBag.GenreId = genreId;
-
-
-                ViewBag.Genres = dbContext
-                    .Genres
-                    .OrderBy(g => g.Name)
-                    .ToArray();
+            ViewBag.Genres = await LoadAllGenresAsync();
 
             return View(games);
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            Game? game = dbContext
+            Game? game = await dbContext
                 .Games
-                .Include(gr => gr.Genre)
-                .FirstOrDefault(g => g.Id == id);
+                .Include(g => g.Genre)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(g => g.Id == id);
 
             if (game == null)
             {
@@ -67,49 +65,55 @@ namespace GameVault.Controllers
             }
 
             return View(game);
-
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            GameFormViewModel model = new();
+            GameFormViewModel model = new GameFormViewModel
+            {
+                Genres = await LoadAllGenresAsync()
+            };
 
-            model.Genres = dbContext
-                .Genres
-                .OrderBy(g => g.Name)
-                .ToArray();
-            
             return View(model);
         }
 
-        [HttpPost] 
-        public IActionResult Create(GameFormViewModel model)
+        [HttpPost]
+        public async Task<IActionResult> Create(GameFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Invalid data was detected!");
-                model.Genres = LoadAllGenres();
+                ModelState.AddModelError(
+                    string.Empty,
+                    "Invalid data was detected!");
+
+                model.Genres = await LoadAllGenresAsync();
 
                 return View(model);
             }
 
             if (model.ReleaseYear > DateTime.Today.Year)
             {
-                ModelState.AddModelError(string.Empty, "Invalid release year was detected!");
-                model.Genres = LoadAllGenres();
+                ModelState.AddModelError(
+                    string.Empty,
+                    "Invalid release year was detected!");
+
+                model.Genres = await LoadAllGenresAsync();
 
                 return View(model);
             }
 
-            bool genreExists = dbContext
+            bool genreExists = await dbContext
                 .Genres
-                .Any(g => g.Id == model.GenreId);
+                .AnyAsync(g => g.Id == model.GenreId);
 
             if (!genreExists)
             {
-                ModelState.AddModelError(nameof(model.GenreId), "Invalid genre was selected!");
-                model.Genres = LoadAllGenres();
+                ModelState.AddModelError(
+                    nameof(model.GenreId),
+                    "Invalid genre was selected!");
+
+                model.Genres = await LoadAllGenresAsync();
 
                 return View(model);
             }
@@ -124,30 +128,32 @@ namespace GameVault.Controllers
                 GenreId = model.GenreId
             };
 
-            dbContext.Games.Add(newGame);
-            dbContext.SaveChanges();
+            await dbContext.Games.AddAsync(newGame);
+            await dbContext.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
-        public IActionResult Edit([FromRoute]int? id)
+        public async Task<IActionResult> Edit([FromRoute] int? id)
         {
             if (!id.HasValue || id.Value <= 0)
             {
-                return BadRequest("There was an error with your request! Please try again!");
+                return BadRequest(
+                    "There was an error with your request! Please try again!");
             }
 
-            Game? gameToEdit = dbContext
+            Game? gameToEdit = await dbContext
                 .Games
-                .FirstOrDefault(g => g.Id == id.Value);
+                .AsNoTracking()
+                .FirstOrDefaultAsync(g => g.Id == id.Value);
 
             if (gameToEdit == null)
             {
                 return NotFound();
             }
 
-            GameFormViewModel model = new GameFormViewModel()
+            GameFormViewModel model = new GameFormViewModel
             {
                 Description = gameToEdit.Description,
                 Title = gameToEdit.Title,
@@ -155,20 +161,24 @@ namespace GameVault.Controllers
                 Developer = gameToEdit.Developer,
                 ImageUrl = gameToEdit.ImageUrl,
                 GenreId = gameToEdit.GenreId,
-
-                Genres = LoadAllGenres()
+                Genres = await LoadAllGenresAsync()
             };
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute]int id, GameFormViewModel model)
+        public async Task<IActionResult> Edit(
+            [FromRoute] int id,
+            GameFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Invalid data was detected!");
-                model.Genres = LoadAllGenres();
+                ModelState.AddModelError(
+                    string.Empty,
+                    "Invalid data was detected!");
+
+                model.Genres = await LoadAllGenresAsync();
 
                 return View(model);
             }
@@ -179,14 +189,14 @@ namespace GameVault.Controllers
                     nameof(model.ReleaseYear),
                     "Invalid release year was detected!");
 
-                model.Genres = LoadAllGenres();
+                model.Genres = await LoadAllGenresAsync();
 
                 return View(model);
             }
 
-            bool genreExists = dbContext
+            bool genreExists = await dbContext
                 .Genres
-                .Any(g => g.Id == model.GenreId);
+                .AnyAsync(g => g.Id == model.GenreId);
 
             if (!genreExists)
             {
@@ -194,14 +204,14 @@ namespace GameVault.Controllers
                     nameof(model.GenreId),
                     "Invalid genre was selected!");
 
-                model.Genres = LoadAllGenres();
+                model.Genres = await LoadAllGenresAsync();
 
                 return View(model);
             }
 
-            Game? gameToEdit = dbContext
+            Game? gameToEdit = await dbContext
                 .Games
-                .FirstOrDefault(g => g.Id == id);
+                .FirstOrDefaultAsync(g => g.Id == id);
 
             if (gameToEdit == null)
             {
@@ -215,13 +225,13 @@ namespace GameVault.Controllers
             gameToEdit.ReleaseYear = model.ReleaseYear;
             gameToEdit.Title = model.Title;
 
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
-        public IActionResult Delete([FromRoute] int? id)
+        public async Task<IActionResult> Delete([FromRoute] int? id)
         {
             if (!id.HasValue || id.Value <= 0)
             {
@@ -229,16 +239,17 @@ namespace GameVault.Controllers
                     "There was an error with your request! Please try again!");
             }
 
-            Game? game = dbContext
+            Game? game = await dbContext
                 .Games
-                .FirstOrDefault(g => g.Id == id.Value);
+                .AsNoTracking()
+                .FirstOrDefaultAsync(g => g.Id == id.Value);
 
             if (game == null)
             {
                 return NotFound();
             }
 
-            GameDeleteViewModel model = new GameDeleteViewModel()
+            GameDeleteViewModel model = new GameDeleteViewModel
             {
                 Id = game.Id,
                 Title = game.Title
@@ -248,7 +259,7 @@ namespace GameVault.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
             if (id <= 0)
             {
@@ -256,8 +267,9 @@ namespace GameVault.Controllers
                     "There was an error with your request! Please try again!");
             }
 
-            Game? gameToDelete = dbContext.Games
-                .FirstOrDefault(g => g.Id == id);
+            Game? gameToDelete = await dbContext
+                .Games
+                .FirstOrDefaultAsync(g => g.Id == id);
 
             if (gameToDelete == null)
             {
@@ -265,17 +277,19 @@ namespace GameVault.Controllers
             }
 
             dbContext.Games.Remove(gameToDelete);
-            dbContext.SaveChanges();
+
+            await dbContext.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
-        private IEnumerable<Genre> LoadAllGenres()
+        private async Task<IEnumerable<Genre>> LoadAllGenresAsync()
         {
-            IEnumerable<Genre> allGenres = dbContext
+            IEnumerable<Genre> allGenres = await dbContext
                 .Genres
+                .AsNoTracking()
                 .OrderBy(g => g.Name)
-                .ToArray();
+                .ToArrayAsync();
 
             return allGenres;
         }

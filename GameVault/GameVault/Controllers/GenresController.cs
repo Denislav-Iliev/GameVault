@@ -1,7 +1,7 @@
 ﻿using GameVault.Data;
 using GameVault.Data.Models;
-using GameVault.Services.Core.Models.Games;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using static GameVault.GCommon.PageValidation;
 
 namespace GameVault.Controllers
@@ -16,13 +16,14 @@ namespace GameVault.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            IEnumerable<Genre> genres = dbContext
+            IEnumerable<Genre> genres = await dbContext
                 .Genres
+                .AsNoTracking()
                 .OrderBy(g => g.Id)
                 .Take(EntitiesPerPage)
-                .ToArray();
+                .ToArrayAsync();
 
             return View(genres);
         }
