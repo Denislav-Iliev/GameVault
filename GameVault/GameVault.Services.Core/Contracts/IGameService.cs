@@ -1,4 +1,5 @@
-﻿using GameVault.Services.Core.Models.Games;
+﻿
+using GameVault.Services.Core.Models.Games;
 using GameVault.Services.Core.Models.Genres;
 
 namespace GameVault.Services.Core.Contracts
@@ -16,6 +17,8 @@ namespace GameVault.Services.Core.Contracts
         Task<GameFormDto?> GetForEditAsync(int id);
 
         Task<GameDeleteDto?> GetForDeleteAsync(int id);
+
+        Task<bool> GenreExistsAsync(int genreId);
 
         Task CreateAsync(GameFormDto model);
 
