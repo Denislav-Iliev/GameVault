@@ -1,9 +1,10 @@
 ﻿using GameVault.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameVault.Data
 {
-    public class GameVaultDbContext : DbContext
+    public class GameVaultDbContext : IdentityDbContext<ApplicationUser>
     {
         public GameVaultDbContext(
             DbContextOptions<GameVaultDbContext> options)
