@@ -56,5 +56,20 @@ namespace GameVault.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Remove(int id)
+        {
+            string? userId = userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                return Challenge();
+            }
+
+            await libraryService.RemoveFromLibraryAsync(id, userId);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -7,5 +7,7 @@ namespace GameVault.Services.Core.Contracts
         Task<IEnumerable<LibraryGameDto>> GetUserLibraryAsync(string userId);
 
         Task<bool> AddToLibraryAsync(int gameId, string userId);
+
+        Task<bool> RemoveFromLibraryAsync(int userGameId, string userId);
     }
 }

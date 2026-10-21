@@ -59,13 +59,30 @@
 
             <div class="gv-library-actions">
 
-                <a href="#" class="btn btn-gv-primary">
-                    VIEW GAME
-                </a>
+             <a asp-controller="Games"
+                asp-action="Details"
+                 asp-route-id="@Model.GameId"
+                class="btn btn-gv-primary">
+                     VIEW GAME
+              </a>
 
-                <a href="#" class="btn btn-gv-outline">
-                    EDIT
-                </a>
+    <a href="#" class="btn btn-gv-outline">
+        EDIT
+    </a>
+
+    <form asp-controller="Library"
+          asp-action="Remove"
+          asp-route-id="@Model.Id"
+          method="post"
+          onsubmit="return confirm('Remove this game from your library?');">
+
+        <button type="submit" class="btn btn-gv-outline">
+            REMOVE
+        </button>
+
+    </form>
+
+</div>
 
             </div>
 

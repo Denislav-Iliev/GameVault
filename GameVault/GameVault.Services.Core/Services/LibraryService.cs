@@ -72,5 +72,24 @@ namespace GameVault.Services.Core.Services
 
             return true;
         }
+
+        public async Task<bool> RemoveFromLibraryAsync(int userGameId, string userId)
+        {
+            UserGame? userGame = await dbContext.UserGames
+                .FirstOrDefaultAsync(ug =>
+                    ug.Id == userGameId &&
+                    ug.UserId == userId);
+
+            if (userGame == null)
+            {
+                return false;
+            }
+
+            dbContext.UserGames.Remove(userGame);
+
+            await dbContext.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
