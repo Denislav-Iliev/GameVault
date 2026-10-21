@@ -1,4 +1,5 @@
-﻿using GameVault.Data;
+﻿using GameVault.Data.Models;
+using GameVault.Data;
 using GameVault.Services.Core.Contracts;
 using GameVault.Services.Core.Models.Genres;
 using Microsoft.EntityFrameworkCore;

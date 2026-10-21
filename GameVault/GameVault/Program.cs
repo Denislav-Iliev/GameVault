@@ -1,8 +1,11 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using GameVault.Data.Models;
 
 namespace GameVault
 {
-    using GameVault.Data;
     using GameVault.Data.Models;
+    using GameVault.Data;
     using GameVault.Services.Core.Contracts;
     using GameVault.Services.Core.Services;
     using Microsoft.AspNetCore.Identity;

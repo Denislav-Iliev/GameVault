@@ -1,5 +1,5 @@
-﻿using GameVault.Data;
-using GameVault.Data.Models;
+﻿using GameVault.Data.Models;
+using GameVault.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static GameVault.GCommon.PageValidation;
