@@ -2,9 +2,11 @@ namespace GameVault.Services.Core.Models.Library
 {
     public class LibraryGameDto
     {
-        public string GameTitle { get; set; } = null!;
+        public int Id { get; set; }
 
-        public string Developer { get; set; } = null!;
+        public int GameId { get; set; }
+
+        public string GameTitle { get; set; } = null!;
 
         public string? ImageUrl { get; set; }
 
@@ -12,8 +14,8 @@ namespace GameVault.Services.Core.Models.Library
 
         public int HoursPlayed { get; set; }
 
-        public DateTime AddedOn { get; set; }
-
         public string? Notes { get; set; }
+
+        public DateTime AddedOn { get; set; }
     }
 }

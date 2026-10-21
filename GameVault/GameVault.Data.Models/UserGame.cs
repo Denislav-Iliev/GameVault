@@ -26,5 +26,11 @@ namespace GameVault.Data.Models
 
         [ForeignKey(nameof(GameId))]
         public Game Game { get; set; } = null!;
+
+        [Required]
+        public string UserId { get; set; } = null!;
+
+        [ForeignKey(nameof(UserId))]
+        public ApplicationUser User { get; set; } = null!;
     }
 }
