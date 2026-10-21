@@ -8,6 +8,8 @@ namespace GameVault.Services.Core.Models.Library
 
         public string GameTitle { get; set; } = null!;
 
+        public string Developer { get; set; } = null!;
+
         public string? ImageUrl { get; set; }
 
         public string Status { get; set; } = null!;

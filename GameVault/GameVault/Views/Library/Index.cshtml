@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UserGame>
+﻿@model IEnumerable<LibraryGameDto>
 
 @{
     ViewData["Title"] = "My Library";
@@ -19,7 +19,7 @@
 </div>
 
 <div class="row g-4">
-    @foreach (UserGame userGame in Model)
+    @foreach (LibraryGameDto userGame in Model)
     {
         <partial name="_LibraryCardPartial" model="userGame" />
     }

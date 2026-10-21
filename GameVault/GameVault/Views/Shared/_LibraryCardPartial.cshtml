@@ -1,12 +1,12 @@
-﻿@model UserGame
+﻿@model LibraryGameDto
 
 <div class="col-12 col-md-6 col-lg-4">
     <div class="gv-library-card">
 
         <div class="gv-library-image-wrapper">
-            <img src="@Model.Game.ImageUrl"
+            <img src="@Model.ImageUrl"
                  class="gv-library-image"
-                 alt="@Model.Game.Title" />
+                 alt="@Model.GameTitle" />
 
             <span class="gv-library-status">
                 @Model.Status
@@ -16,11 +16,11 @@
         <div class="gv-library-body">
 
             <h2 class="gv-library-title">
-                @Model.Game.Title
+                @Model.GameTitle
             </h2>
 
             <p class="gv-library-developer">
-                @Model.Game.Developer
+                @Model.Developer
             </p>
 
             <div class="gv-library-stats">
@@ -31,7 +31,7 @@
                     </span>
 
                     <span class="gv-library-stat-value">
-						@Model.HoursPlayed h
+                        @Model.HoursPlayed h
                     </span>
                 </div>
 

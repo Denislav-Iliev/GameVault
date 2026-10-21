@@ -40,10 +40,19 @@
                     Details
                 </a>
 
-                <a href="#"
-                   class="btn btn-gv-outline">
-                    Add to Library
-                </a>
+                <form asp-controller="Library"
+                      asp-action="Add"
+                      method="post">
+
+                    <input type="hidden"
+                           name="gameId"
+                           value="@Model.Id" />
+
+                    <button type="submit"
+                            class="btn btn-gv-outline">
+                        Add to Library
+                    </button>
+                </form>
 
                 <div class="gv-card-manage-actions">
 
