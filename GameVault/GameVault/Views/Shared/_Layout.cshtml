@@ -1,4 +1,8 @@
-﻿
+﻿@using GameVault.Data.Models
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,20 +96,59 @@
                             </a>
                         </li>
 
-                    </ul>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-area="Identity"
+                                   asp-page="/Account/Manage/Index">
+                                    My Profile
+                                </a>
+                            </li>
 
+                            <li class="nav-item">
+                                <form asp-area="Identity"
+                                      asp-page="/Account/Logout"
+                                      asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"
+                                      method="post">
+
+                                    <button type="submit"
+                                            class="nav-link gv-logout-btn">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-area="Identity"
+                                   asp-page="/Account/Login">
+                                    Login
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link gv-library-link"
+                                   asp-area="Identity"
+                                   asp-page="/Account/Register">
+                                    Register
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
                 </div>
             </div>
         </nav>
     </header>
-
 
     <main class="gv-main">
         <div class="container">
             @RenderBody()
         </div>
     </main>
-
 
     <footer class="gv-footer">
         <div class="container">
@@ -125,7 +168,6 @@
             </div>
         </div>
     </footer>
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

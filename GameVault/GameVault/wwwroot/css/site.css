@@ -1472,3 +1472,14 @@ select.gv-form-control {
         border-color: #ff003c;
         color: #ff003c;
     }
+
+.gv-logout-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+}
+
+    .gv-logout-btn:hover {
+        color: #ff1744;
+    }
