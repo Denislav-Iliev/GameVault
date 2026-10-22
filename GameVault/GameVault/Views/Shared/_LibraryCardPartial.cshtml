@@ -66,9 +66,12 @@
                      VIEW GAME
               </a>
 
-    <a href="#" class="btn btn-gv-outline">
-        EDIT
-    </a>
+                <a asp-controller="Library"
+                   asp-action="Edit"
+                   asp-route-id="@Model.Id"
+                   class="btn btn-gv-outline">
+                    EDIT
+                </a>
 
     <form asp-controller="Library"
           asp-action="Remove"

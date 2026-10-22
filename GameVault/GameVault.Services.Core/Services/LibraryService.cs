@@ -91,5 +91,42 @@ namespace GameVault.Services.Core.Services
 
             return true;
         }
+
+        public async Task<LibraryEditDto?> GetForEditAsync(int id, string userId)
+        {
+            return await dbContext.UserGames
+                .AsNoTracking()
+                .Where(ug => ug.Id == id && ug.UserId == userId)
+                .Select(ug => new LibraryEditDto
+                {
+                    Id = ug.Id,
+                    GameTitle = ug.Game.Title,
+                    Status = ug.Status,
+                    HoursPlayed = ug.HoursPlayed,
+                    Notes = ug.Notes
+                })
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> EditAsync(LibraryEditDto model, string userId)
+        {
+            UserGame? userGame = await dbContext.UserGames
+                .FirstOrDefaultAsync(ug =>
+                    ug.Id == model.Id &&
+                    ug.UserId == userId);
+
+            if (userGame == null)
+            {
+                return false;
+            }
+
+            userGame.Status = model.Status;
+            userGame.HoursPlayed = model.HoursPlayed;
+            userGame.Notes = model.Notes;
+
+            await dbContext.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

@@ -1,0 +1,96 @@
+﻿@model LibraryEditDto
+
+@{
+    ViewData["Title"] = "Edit Library Entry";
+}
+
+<div class="gv-page-header">
+    <div class="gv-page-eyebrow">
+        YOUR COLLECTION
+    </div>
+
+    <h1 class="gv-page-title">
+        Edit Library Entry
+    </h1>
+
+    <p class="gv-page-description">
+        Update your progress for @Model.GameTitle.
+    </p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+
+        <form asp-controller="Library"
+              asp-action="Edit"
+              method="post">
+
+            <input asp-for="Id" type="hidden" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-3"></div>
+
+            <div class="mb-4">
+                <label asp-for="Status" class="form-label">
+                    Status
+                </label>
+
+                <select asp-for="Status" class="form-select">
+                    <option value="Playing">Playing</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Plan to Play">Plan to Play</option>
+                    <option value="Dropped">Dropped</option>
+                </select>
+
+                <span asp-validation-for="Status"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="HoursPlayed" class="form-label">
+                    Hours Played
+                </label>
+
+                <input asp-for="HoursPlayed"
+                       type="number"
+                       min="0"
+                       class="form-control" />
+
+                <span asp-validation-for="HoursPlayed"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Notes" class="form-label">
+                    Notes
+                </label>
+
+                <textarea asp-for="Notes"
+                          class="form-control"
+                          rows="4"
+                          placeholder="Write something about your progress..."></textarea>
+
+                <span asp-validation-for="Notes"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-gv-primary">
+                    SAVE CHANGES
+                </button>
+
+                <a asp-controller="Library"
+                   asp-action="Index"
+                   class="btn btn-gv-outline">
+                    CANCEL
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

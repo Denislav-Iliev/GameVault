@@ -1,5 +1,6 @@
 ﻿using GameVault.Data.Models;
 using GameVault.Services.Core.Contracts;
+using GameVault.Services.Core.Models.Library;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,6 @@ namespace GameVault.Controllers
 
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(int gameId)
         {
             string? userId = userManager.GetUserId(User);
@@ -68,6 +68,60 @@ namespace GameVault.Controllers
             }
 
             await libraryService.RemoveFromLibraryAsync(id, userId);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            string? userId = userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                return Challenge();
+            }
+
+            var model = await libraryService.GetForEditAsync(id, userId);
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(LibraryEditDto model)
+        {
+            string? userId = userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                return Challenge();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var existingEntry = await libraryService.GetForEditAsync(model.Id, userId);
+
+                if (existingEntry == null)
+                {
+                    return NotFound();
+                }
+
+                model.GameTitle = existingEntry.GameTitle;
+
+                return View(model);
+            }
+
+            bool updated = await libraryService.EditAsync(model, userId);
+
+            if (!updated)
+            {
+                return NotFound();
+            }
 
             return RedirectToAction(nameof(Index));
         }

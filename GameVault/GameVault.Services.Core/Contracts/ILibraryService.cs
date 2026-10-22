@@ -9,5 +9,9 @@ namespace GameVault.Services.Core.Contracts
         Task<bool> AddToLibraryAsync(int gameId, string userId);
 
         Task<bool> RemoveFromLibraryAsync(int userGameId, string userId);
+
+        Task<LibraryEditDto?> GetForEditAsync(int id, string userId);
+
+        Task<bool> EditAsync(LibraryEditDto model, string userId);
     }
 }
