@@ -40,40 +40,45 @@
                     Details
                 </a>
 
-                <form asp-controller="Library"
-                      asp-action="Add"
-                      method="post">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <form asp-controller="Library"
+                          asp-action="Add"
+                          method="post">
 
-                    <input type="hidden"
-                           name="gameId"
-                           value="@Model.Id" />
+                        <input type="hidden"
+                               name="gameId"
+                               value="@Model.Id" />
 
-                    <button type="submit"
-                            class="btn btn-gv-outline">
-                        Add to Library
-                    </button>
-                </form>
+                        <button type="submit"
+                                class="btn btn-gv-outline">
+                            Add to Library
+                        </button>
+                    </form>
+                }
 
-                <div class="gv-card-manage-actions">
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="gv-card-manage-actions">
 
-                    <a asp-controller="Games"
-                       asp-action="Edit"
-                       asp-route-id="@Model.Id"
-                       class="btn gv-btn-edit">
-                        EDIT
-                    </a>
+                        <a asp-controller="Games"
+                           asp-action="Edit"
+                           asp-route-id="@Model.Id"
+                           class="btn gv-btn-edit">
+                            EDIT
+                        </a>
 
-                    <a asp-controller="Games"
-                       asp-action="Delete"
-                       asp-route-id="@Model.Id"
-                       class="btn gv-btn-delete-card">
-                        DELETE
-                    </a>
+                        <a asp-controller="Games"
+                           asp-action="Delete"
+                           asp-route-id="@Model.Id"
+                           class="btn gv-btn-delete-card">
+                            DELETE
+                        </a>
 
-                </div>
+                    </div>
+                }
 
             </div>
-
         </div>
     </div>
 </div>

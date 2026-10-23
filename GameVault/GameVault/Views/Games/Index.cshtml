@@ -29,16 +29,18 @@
             </p>
         </div>
 
-        <a asp-controller="Games"
-           asp-action="Create"
-           class="btn gv-btn-submit">
-            + ADD GAME
-        </a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="Games"
+               asp-action="Create"
+               class="btn gv-btn-submit">
+                + ADD GAME
+            </a>
+        }
 
     </div>
 
 </div>
-
 
 <form asp-controller="Games"
       asp-action="Index"
@@ -84,7 +86,6 @@
     </a>
 
 </form>
-
 
 <div class="row g-4 mt-3">
 

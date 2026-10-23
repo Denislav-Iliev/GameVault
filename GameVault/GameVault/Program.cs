@@ -1,19 +1,16 @@
+using GameVault.Infrastructure;
+using GameVault.Data;
+using GameVault.Data.Models;
+using GameVault.Services.Core.Contracts;
+using GameVault.Services.Core.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using GameVault.Data.Models;
 
 namespace GameVault
 {
-    using GameVault.Data.Models;
-    using GameVault.Data;
-    using GameVault.Services.Core.Contracts;
-    using GameVault.Services.Core.Services;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
-
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +23,7 @@ namespace GameVault
                 {
                     options.SignIn.RequireConfirmedAccount = false;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<GameVaultDbContext>();
 
             builder.Services.AddScoped<IGameService, GameService>();
@@ -37,6 +35,16 @@ namespace GameVault
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
+
+            if (app.Environment.IsDevelopment())
+            {
+                using (IServiceScope scope = app.Services.CreateScope())
+                {
+                    await IdentitySeeder.SeedAdminAsync(
+                        scope.ServiceProvider,
+                        app.Configuration);
+                }
+            }
 
             if (!app.Environment.IsDevelopment())
             {

@@ -1,4 +1,5 @@
-﻿using GameVault.Services.Core.Models.Genres;
+﻿
+using GameVault.Services.Core.Models.Genres;
 using GameVault.Data.Models;
 using GameVault.Services.Core.Models.Reviews;
 using GameVault.ViewModels;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using GameVault.Services.Core.Contracts;
 using GameVault.Services.Core.Models.Games;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameVault.Controllers
 {
@@ -16,10 +18,10 @@ namespace GameVault.Controllers
 
         private readonly IReviewService reviewService;
         private readonly UserManager<ApplicationUser> userManager;
-
         private readonly IGameService gameService;
 
-        public GamesController(IGameService gameService,
+        public GamesController(
+            IGameService gameService,
             IReviewService reviewService,
             UserManager<ApplicationUser> userManager)
         {
@@ -28,7 +30,7 @@ namespace GameVault.Controllers
             this.userManager = userManager;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Index(
             [FromQuery] int? genreId,
@@ -43,9 +45,7 @@ namespace GameVault.Controllers
             return View(games);
         }
 
-
-
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -74,8 +74,7 @@ namespace GameVault.Controllers
             return View(model);
         }
 
-
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -87,6 +86,7 @@ namespace GameVault.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(GameFormViewModel model)
         {
@@ -130,6 +130,7 @@ namespace GameVault.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit([FromRoute] int? id)
         {
@@ -160,6 +161,7 @@ namespace GameVault.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(
             [FromRoute] int id,
@@ -210,6 +212,7 @@ namespace GameVault.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Delete([FromRoute] int? id)
         {
@@ -235,6 +238,7 @@ namespace GameVault.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

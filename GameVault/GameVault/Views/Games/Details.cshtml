@@ -29,7 +29,6 @@
             </div>
         </div>
 
-
         <div class="col-12 col-lg-6">
 
             <div class="gv-details-content">
@@ -87,36 +86,41 @@
 
                 </div>
 
-                <div class="gv-details-actions">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <div class="gv-details-actions">
 
-                    <form asp-controller="Library"
-                          asp-action="Add"
-                          method="post">
+                        <form asp-controller="Library"
+                              asp-action="Add"
+                              method="post">
 
-                        <input type="hidden" name="gameId" value="@game.Id" />
+                            <input type="hidden"
+                                   name="gameId"
+                                   value="@game.Id" />
 
-                        <button type="submit" class="btn btn-gv-primary">
-                            ADD TO LIBRARY
-                        </button>
-                    </form>
+                            <button type="submit"
+                                    class="btn btn-gv-primary">
+                                ADD TO LIBRARY
+                            </button>
+                        </form>
 
-                    <a href="#reviews" class="btn btn-gv-outline">
-                        WRITE REVIEW
-                    </a>
+                        <a href="#reviews"
+                           class="btn btn-gv-outline">
+                            WRITE REVIEW
+                        </a>
 
-                </div>
+                    </div>
+                }
 
             </div>
-
         </div>
-
     </div>
-
 </div>
 
 <section id="reviews" class="mt-5">
 
     <div class="gv-page-header">
+
         <div class="gv-page-eyebrow">
             COMMUNITY FEEDBACK
         </div>
@@ -128,6 +132,7 @@
         <p class="gv-page-description">
             See what other players think about this game.
         </p>
+
     </div>
 
     @if (User.Identity?.IsAuthenticated == true)
@@ -150,31 +155,41 @@
                            value="@game.Id" />
 
                     <div class="mb-3">
-                        <label class="form-label">Rating</label>
+
+                        <label class="form-label">
+                            Rating
+                        </label>
 
                         <select name="Rating"
                                 class="form-select"
                                 required>
+
                             <option value="">Select a rating</option>
 
                             @for (int i = 1; i <= 10; i++)
                             {
                                 <option value="@i">@i / 10</option>
                             }
+
                         </select>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Your Review</label>
+
+                        <label class="form-label">
+                            Your Review
+                        </label>
 
                         <textarea name="Content"
                                   class="form-control"
                                   rows="4"
                                   required
                                   placeholder="Share your experience..."></textarea>
+
                     </div>
 
-                    <button type="submit" class="btn btn-gv-primary">
+                    <button type="submit"
+                            class="btn btn-gv-primary">
                         SUBMIT REVIEW
                     </button>
 
@@ -194,11 +209,13 @@
     {
         <p class="gv-page-description">
             Want to share your opinion?
+
             <a asp-area="Identity"
                asp-page="/Account/Login"
                asp-route-returnUrl="@Url.Action("Details", "Games", new { id = game.Id })">
                 Log in
             </a>
+
             to write a review.
         </p>
     }
@@ -216,14 +233,17 @@
             @foreach (var review in Model.Reviews)
             {
                 <div class="col-12 col-md-6">
+
                     <div class="gv-card p-4 h-100">
 
                         <div class="d-flex justify-content-between align-items-center mb-3">
+
                             <strong>@review.UserName</strong>
 
                             <span class="gv-badge">
                                 @review.Rating / 10
                             </span>
+
                         </div>
 
                         <p class="gv-card-text">
