@@ -1483,3 +1483,111 @@ select.gv-form-control {
     .gv-logout-btn:hover {
         color: #ff1744;
     }
+
+
+/* =========================================================
+   GAMEVAULT - IDENTITY PROFILE
+   ========================================================= */
+
+/* Profile headings */
+.gv-main h1,
+.gv-main h2,
+.gv-main h3 {
+    color: var(--gv-text);
+}
+
+/* Profile navigation */
+.gv-main .nav-pills {
+    gap: 7px;
+}
+
+    .gv-main .nav-pills .nav-link {
+        padding: 12px 16px;
+        border: 1px solid transparent;
+        border-radius: 7px;
+        color: var(--gv-text-muted);
+        background: transparent;
+        font-size: 13px;
+        font-weight: 700;
+        transition: all var(--gv-transition);
+    }
+
+        .gv-main .nav-pills .nav-link:hover {
+            color: white;
+            border-color: rgba(255, 0, 60, 0.25);
+            background: rgba(255, 0, 60, 0.06);
+        }
+
+        .gv-main .nav-pills .nav-link.active {
+            color: white;
+            border-color: var(--gv-accent);
+            background: rgba(255, 0, 60, 0.14);
+        }
+
+/* Profile input fields */
+.gv-main .form-floating > .form-control {
+    color: var(--gv-text);
+    background-color: var(--gv-surface);
+    border: 1px solid var(--gv-border);
+    border-radius: 7px;
+}
+
+    .gv-main .form-floating > .form-control:focus {
+        color: white;
+        background-color: var(--gv-surface-light);
+        border-color: var(--gv-accent);
+        box-shadow: 0 0 0 3px rgba(255, 0, 60, 0.12);
+    }
+
+.gv-main .form-floating > label {
+    color: var(--gv-text-muted);
+}
+
+.gv-main .form-floating > .form-control:focus ~ label,
+.gv-main .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--gv-text-muted);
+}
+
+.gv-main .form-control:disabled,
+.gv-main .form-control[readonly] {
+    color: #aaaab5;
+    background-color: #18181d;
+    opacity: 1;
+}
+
+/* Primary buttons */
+.gv-main .btn-primary {
+    color: white;
+    background: var(--gv-accent);
+    border-color: var(--gv-accent);
+    font-weight: 700;
+    transition: all var(--gv-transition);
+}
+
+    .gv-main .btn-primary:hover {
+        color: white;
+        background: var(--gv-accent-dark);
+        border-color: var(--gv-accent-dark);
+        box-shadow: 0 5px 20px rgba(255, 0, 60, 0.18);
+    }
+
+    .gv-main .btn-primary:focus {
+        box-shadow: 0 0 0 3px rgba(255, 0, 60, 0.2);
+    }
+
+/* Checkboxes */
+.gv-main .form-check-input:checked {
+    background-color: var(--gv-accent);
+    border-color: var(--gv-accent);
+}
+
+.gv-main .form-check-input:focus {
+    border-color: var(--gv-accent);
+    box-shadow: 0 0 0 3px rgba(255, 0, 60, 0.12);
+}
+
+/* Profile separators */
+.gv-main hr {
+    border-color: rgba(255, 255, 255, 0.15);
+    opacity: 1;
+}

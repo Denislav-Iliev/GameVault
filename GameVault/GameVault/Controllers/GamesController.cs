@@ -127,6 +127,8 @@ namespace GameVault.Controllers
 
             await gameService.CreateAsync(dto);
 
+            TempData["SuccessMessage"] = "Game added successfully!";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -209,6 +211,8 @@ namespace GameVault.Controllers
                 return NotFound();
             }
 
+            TempData["SuccessMessage"] = "Game updated successfully!";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -253,6 +257,8 @@ namespace GameVault.Controllers
             {
                 return NotFound();
             }
+
+            TempData["SuccessMessage"] = "Game deleted successfully!";
 
             return RedirectToAction(nameof(Index));
         }
