@@ -1,5 +1,8 @@
 ﻿using GameVault.Services.Core.Models.Genres;
 using GameVault.Data.Models;
+using GameVault.Services.Core.Models.Reviews;
+using GameVault.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using GameVault.Services.Core.Contracts;
 using GameVault.Services.Core.Models.Games;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +14,18 @@ namespace GameVault.Controllers
         private const string InvalidRequestMessage =
             "There was an error with your request! Please try again!";
 
+        private readonly IReviewService reviewService;
+        private readonly UserManager<ApplicationUser> userManager;
+
         private readonly IGameService gameService;
 
-        public GamesController(IGameService gameService)
+        public GamesController(IGameService gameService,
+            IReviewService reviewService,
+            UserManager<ApplicationUser> userManager)
         {
             this.gameService = gameService;
+            this.reviewService = reviewService;
+            this.userManager = userManager;
         }
 
 
@@ -35,6 +45,7 @@ namespace GameVault.Controllers
 
 
 
+
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -46,8 +57,23 @@ namespace GameVault.Controllers
                 return NotFound();
             }
 
-            return View(game);
+            IEnumerable<ReviewDto> reviews =
+                await reviewService.GetReviewsByGameAsync(id);
+
+            GameDetailsViewModel model = new GameDetailsViewModel
+            {
+                Game = game,
+                Reviews = reviews,
+                NewReview = new ReviewFormDto
+                {
+                    GameId = id
+                },
+                CurrentUserId = userManager.GetUserId(User)
+            };
+
+            return View(model);
         }
+
 
 
         [HttpGet]

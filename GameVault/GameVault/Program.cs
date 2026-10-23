@@ -31,6 +31,7 @@ namespace GameVault
             builder.Services.AddScoped<IGameService, GameService>();
             builder.Services.AddScoped<IGenreService, GenreService>();
             builder.Services.AddScoped<ILibraryService, LibraryService>();
+            builder.Services.AddScoped<IReviewService, ReviewService>();
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();

@@ -13,6 +13,16 @@ namespace GameVault.Data.Configurations
                 .WithMany(g => g.Reviews)
                 .HasForeignKey(r => r.GameId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .HasOne(r => r.User)
+                .WithMany()
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasIndex(r => new { r.UserId, r.GameId })
+                .IsUnique();
         }
     }
 }

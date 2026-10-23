@@ -1,7 +1,8 @@
-﻿@model GameDetailsDto
+﻿@model GameDetailsViewModel
 
 @{
     ViewData["Title"] = "Game Details";
+    GameDetailsDto game = Model.Game;
 }
 
 <div class="gv-details">
@@ -17,12 +18,12 @@
         <div class="col-12 col-lg-6">
             <div class="gv-details-image-wrapper">
 
-                <img src="@Model.ImageUrl"
-                     alt="@Model.Title"
+                <img src="@game.ImageUrl"
+                     alt="@game.Title"
                      class="gv-details-image" />
 
                 <span class="gv-details-year">
-                    @Model.ReleaseYear
+                    @game.ReleaseYear
                 </span>
 
             </div>
@@ -38,16 +39,16 @@
                 </span>
 
                 <span class="gv-badge gv-details-genre">
-                    @Model.GenreName
+                    @game.GenreName
                 </span>
 
                 <h1 class="gv-details-title">
-                    @Model.Title
+                    @game.Title
                 </h1>
 
                 <p class="gv-details-developer">
                     DEVELOPED BY
-                    <span>@Model.Developer</span>
+                    <span>@game.Developer</span>
                 </p>
 
                 <div class="gv-details-divider"></div>
@@ -58,7 +59,7 @@
                     </span>
 
                     <p class="gv-details-description">
-                        @Model.Description
+                        @game.Description
                     </p>
                 </div>
 
@@ -70,7 +71,7 @@
                         </span>
 
                         <strong>
-                            @Model.ReleaseYear
+                            @game.ReleaseYear
                         </strong>
                     </div>
 
@@ -80,7 +81,7 @@
                         </span>
 
                         <strong>
-                            @Model.GenreName
+                            @game.GenreName
                         </strong>
                     </div>
 
@@ -88,11 +89,18 @@
 
                 <div class="gv-details-actions">
 
-                    <a href="#" class="btn btn-gv-primary">
-                        ADD TO LIBRARY
-                    </a>
+                    <form asp-controller="Library"
+                          asp-action="Add"
+                          method="post">
 
-                    <a href="#" class="btn btn-gv-outline">
+                        <input type="hidden" name="gameId" value="@game.Id" />
+
+                        <button type="submit" class="btn btn-gv-primary">
+                            ADD TO LIBRARY
+                        </button>
+                    </form>
+
+                    <a href="#reviews" class="btn btn-gv-outline">
                         WRITE REVIEW
                     </a>
 
@@ -105,3 +113,159 @@
     </div>
 
 </div>
+
+<section id="reviews" class="mt-5">
+
+    <div class="gv-page-header">
+        <div class="gv-page-eyebrow">
+            COMMUNITY FEEDBACK
+        </div>
+
+        <h2 class="gv-page-title">
+            Player Reviews
+        </h2>
+
+        <p class="gv-page-description">
+            See what other players think about this game.
+        </p>
+    </div>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        bool hasReviewed = Model.Reviews.Any(r =>
+            r.UserId == Model.CurrentUserId);
+
+        if (!hasReviewed)
+        {
+            <div class="gv-card p-4 mb-4">
+
+                <h3 class="mb-3">Write a Review</h3>
+
+                <form asp-controller="Reviews"
+                      asp-action="Add"
+                      method="post">
+
+                    <input type="hidden"
+                           name="GameId"
+                           value="@game.Id" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Rating</label>
+
+                        <select name="Rating"
+                                class="form-select"
+                                required>
+                            <option value="">Select a rating</option>
+
+                            @for (int i = 1; i <= 10; i++)
+                            {
+                                <option value="@i">@i / 10</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Your Review</label>
+
+                        <textarea name="Content"
+                                  class="form-control"
+                                  rows="4"
+                                  required
+                                  placeholder="Share your experience..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-gv-primary">
+                        SUBMIT REVIEW
+                    </button>
+
+                </form>
+
+            </div>
+        }
+        else
+        {
+            <p class="gv-page-description">
+                You have already reviewed this game.
+                You can edit your existing review below.
+            </p>
+        }
+    }
+    else
+    {
+        <p class="gv-page-description">
+            Want to share your opinion?
+            <a asp-area="Identity"
+               asp-page="/Account/Login"
+               asp-route-returnUrl="@Url.Action("Details", "Games", new { id = game.Id })">
+                Log in
+            </a>
+            to write a review.
+        </p>
+    }
+
+    @if (!Model.Reviews.Any())
+    {
+        <p class="gv-page-description">
+            No reviews yet. Be the first to review this game!
+        </p>
+    }
+    else
+    {
+        <div class="row g-4">
+
+            @foreach (var review in Model.Reviews)
+            {
+                <div class="col-12 col-md-6">
+                    <div class="gv-card p-4 h-100">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <strong>@review.UserName</strong>
+
+                            <span class="gv-badge">
+                                @review.Rating / 10
+                            </span>
+                        </div>
+
+                        <p class="gv-card-text">
+                            @review.Content
+                        </p>
+
+                        <div class="gv-game-developer mb-3">
+                            @review.CreatedOn.ToString("MMM dd, yyyy")
+                        </div>
+
+                        @if (review.UserId == Model.CurrentUserId)
+                        {
+                            <div class="d-flex gap-2 mt-auto">
+
+                                <a asp-controller="Reviews"
+                                   asp-action="Edit"
+                                   asp-route-id="@review.Id"
+                                   class="btn btn-gv-outline">
+                                    EDIT
+                                </a>
+
+                                <form asp-controller="Reviews"
+                                      asp-action="Delete"
+                                      asp-route-id="@review.Id"
+                                      method="post"
+                                      onsubmit="return confirm('Delete your review?');">
+
+                                    <button type="submit"
+                                            class="btn btn-gv-outline">
+                                        DELETE
+                                    </button>
+
+                                </form>
+
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
+
+</section>

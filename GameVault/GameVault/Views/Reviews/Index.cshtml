@@ -1,26 +1,98 @@
-﻿@model IEnumerable<Review>
+﻿@model IEnumerable<ReviewDto>
 
 @{
-    ViewData["Title"] = "Reviews";
+    ViewData["Title"] = "My Reviews";
 }
 
 <div class="gv-page-header">
     <div class="gv-page-eyebrow">
-        COMMUNITY REVIEWS
+        YOUR OPINIONS
     </div>
 
     <h1 class="gv-page-title">
-        Reviews
+        My Reviews
     </h1>
 
     <p class="gv-page-description">
-        See what players think about the games in the vault.
+        Manage all the reviews you have written.
     </p>
 </div>
 
-<div class="row g-4">
-    @foreach (Review review in Model)
-    {
-        <partial name="_ReviewCardPartial" model="review" />
-    }
-</div>
+@if (!Model.Any())
+{
+    <p class="gv-page-description">
+        You haven't written any reviews yet.
+    </p>
+
+    <a asp-controller="Games"
+       asp-action="Index"
+       class="btn btn-gv-primary">
+        BROWSE GAMES
+    </a>
+}
+else
+{
+    <div class="row g-4">
+
+        @foreach (ReviewDto review in Model)
+        {
+            <div class="col-12 col-md-6">
+                <div class="gv-card p-4 h-100">
+
+                    <span class="gv-page-eyebrow">
+                        GAME REVIEW
+                    </span>
+
+                    <h2 class="gv-card-title mt-3">
+                        @review.GameTitle
+                    </h2>
+
+                    <span class="gv-badge mt-3">
+                        @review.Rating / 10
+                    </span>
+
+                    <p class="gv-card-text mt-3">
+                        @review.Content
+                    </p>
+
+                    <p class="gv-game-developer mt-3">
+                        @review.CreatedOn.ToString("MMM dd, yyyy")
+                    </p>
+
+                    <div class="d-flex gap-2 mt-3 flex-wrap">
+
+                        <a asp-controller="Games"
+                           asp-action="Details"
+                           asp-route-id="@review.GameId"
+                           class="btn btn-gv-primary">
+                            VIEW GAME
+                        </a>
+
+                        <a asp-controller="Reviews"
+                           asp-action="Edit"
+                           asp-route-id="@review.Id"
+                           class="btn btn-gv-outline">
+                            EDIT
+                        </a>
+
+                        <form asp-controller="Reviews"
+                              asp-action="Delete"
+                              asp-route-id="@review.Id"
+                              method="post"
+                              onsubmit="return confirm('Delete your review?');">
+
+                            <button type="submit"
+                                    class="btn btn-gv-outline">
+                                DELETE
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+}

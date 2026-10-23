@@ -61,6 +61,7 @@ namespace GameVault.Services.Core.Services
                 .Where(g => g.Id == id)
                 .Select(g => new GameDetailsDto
                 {
+                    Id = g.Id,
                     Title = g.Title,
                     Description = g.Description,
                     ReleaseYear = g.ReleaseYear,
